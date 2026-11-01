@@ -3,6 +3,7 @@ from types import SimpleNamespace
 import json
 
 import pytest
+import requests
 
 from siterag.config import Settings
 from siterag.generation import REFUSAL, answer, extractive
@@ -38,6 +39,8 @@ def test_no_relevant_evidence_abstains_when_llm_is_disabled(monkeypatch):
     assert response['answer'] == REFUSAL and response['sources'] == []
     assert response['meta']['context_filter']['selected_count'] == 0
     assert original['meta']['warnings'] == []
+    assert response['meta']['generation'] == {'requested': False, 'attempted': False,
+        'status': 'disabled', 'fallback_reason': 'user_disabled'}
 
 
 def test_never_mode_and_reranker_outage_require_topic_support():
@@ -78,6 +81,8 @@ def test_only_cited_sources_are_returned_and_references_are_renumbered(monkeypat
     assert response['answer_mode'] == 'llm'
     assert response['answer'] == 'Результат эксперимента [1].'
     assert [h['id'] for h in response['sources']] == ['b']
+    assert response['meta']['generation'] == {'requested': True, 'attempted': True,
+        'status': 'generated', 'fallback_reason': None}
 
 
 def test_llm_refusal_does_not_leave_source_cards(monkeypatch):
@@ -153,3 +158,34 @@ def test_extractive_news_uses_topic_evidence_instead_of_common_question_words():
             'Новый тренд машинного обучения — персональные ассистенты на основе LLM.')
     response = extractive('какие последние новости в ml', [hit('paper', text)])
     assert 'ассистенты' in response and 'Температура' not in response
+
+
+@pytest.mark.parametrize('failure,expected', [
+    (requests.Timeout(), 'timeout'),
+    ('', 'empty_response'),
+    ('{broken json', 'invalid_json'),
+    (json.dumps({'status': 'answered', 'relevant_sources': [1], 'answer': 'Wrong citation [99].'}), 'invalid_citations'),
+    (json.dumps({'status': 'answered', 'relevant_sources': [99], 'answer': 'Answer [1].'}), 'invalid_semantic_sources'),
+    (requests.HTTPError(response=SimpleNamespace(status_code=502)), 'http_502'),
+])
+def test_automatic_fallback_preserves_requested_setting_and_reports_reason(monkeypatch, failure, expected):
+    def post(*args, **kwargs):
+        if isinstance(failure, Exception):
+            raise failure
+        return SimpleNamespace(raise_for_status=lambda: None, json=lambda: {
+            'choices': [{'message': {'content': failure}}]})
+    monkeypatch.setattr('siterag.generation.requests.post', post)
+    response = answer('DeepSeek', result([hit('paper', 'DeepSeek performed well in the experiment.', -2)]),
+                      Settings(api_url='https://example.org/v1', api_key='test-key'))
+    assert response['answer_mode'] == 'extractive' and response['sources']
+    assert response['meta']['generation'] == {'requested': True, 'attempted': True,
+        'status': 'fallback', 'fallback_reason': expected}
+    assert response['meta']['llm_error'] == expected
+    assert 'test-key' not in str(response)
+
+
+def test_unconfigured_generation_is_different_from_user_disabled():
+    response = answer('DeepSeek', result([hit('paper', 'DeepSeek experimental results.', -2)]),
+                      Settings(api_url='', api_key=''))
+    assert response['meta']['generation'] == {'requested': True, 'attempted': False,
+        'status': 'fallback', 'fallback_reason': 'not_configured'}

@@ -72,8 +72,11 @@ def answer(question, search_result, settings, use_llm=True):
     started = time.perf_counter()
     result = {'answer': extractive(question, hits), 'answer_mode': 'extractive', 'sources': hits,
               'meta': meta, 'citations_valid': True, 'model': None}
+    generation = {'requested': use_llm, 'attempted': False, 'status': 'not_needed', 'fallback_reason': None}
+    meta['generation'] = generation
     pool = search_result['hits'][:10]
     if pool and use_llm and settings.api_key and settings.api_url:
+        generation.update(attempted=True, status='running')
         # Let the language model assess meaning and answer in one call; do not apply
         # an uncalibrated cross-encoder cutoff before it can inspect the evidence.
         context = '\n\n'.join(f"[{i}] {h['title']}\nURL: {h['url']}\nДата публикации: {h.get('published_at') or 'не указана'}\n{h['text']}" for i, h in enumerate(pool, 1))
@@ -115,6 +118,7 @@ def answer(question, search_result, settings, use_llm=True):
             result['meta']['warnings'] = [w for w in result['meta']['warnings'] if w != 'Подходящих фрагментов недостаточно: ответ не сгенерирован']
             result['meta']['context_filter'] = {'policy_version': 'semantic-v1', 'methods': ['llm_semantic'],
                 'input_count': len(pool), 'selected_count': len(used), 'local_fallback': admission}
+            generation['status'] = 'generated'
         except Exception as error:
             if isinstance(error, json.JSONDecodeError):
                 result['meta']['llm_error'] = 'invalid_json'
@@ -126,9 +130,13 @@ def answer(question, search_result, settings, use_llm=True):
                 result['meta']['llm_error'] = str(error)
             else:
                 result['meta']['llm_error'] = 'invalid_response_or_connection'
+            generation.update(status='fallback', fallback_reason=result['meta']['llm_error'])
             result['meta']['warnings'].append('Генерация недоступна или ссылки не прошли проверку: показана экстрактивная выжимка')
-    elif hits and use_llm:
+    elif pool and use_llm:
+        generation.update(status='fallback', fallback_reason='not_configured')
         result['meta']['warnings'].append('LLM не подключена: показана экстрактивная выжимка')
+    elif pool and not use_llm:
+        generation.update(status='disabled', fallback_reason='user_disabled')
     result['meta']['timings_ms']['generation'] = (time.perf_counter() - started) * 1000
     result['meta']['timings_ms']['request_total'] = (result['meta']['timings_ms']['total'] +
         result['meta']['timings_ms']['context_filter'] + result['meta']['timings_ms']['generation'])

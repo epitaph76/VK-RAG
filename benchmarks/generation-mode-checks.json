@@ -1,0 +1,39 @@
+{
+  "question": "а про deepseek последние какие новости",
+  "http_status": 200,
+  "seconds": 26.88,
+  "answer_mode": "extractive",
+  "generation": {
+    "requested": true,
+    "attempted": true,
+    "status": "fallback",
+    "fallback_reason": "invalid_citations"
+  },
+  "llm_error": "invalid_citations",
+  "source_count": 5,
+  "source_urls": [
+    "https://habr.com/ru/articles/1102340/",
+    "https://habr.com/ru/companies/bothub/articles/1102356/"
+  ],
+  "warnings": [
+    "Генерация недоступна или ссылки не прошли проверку: показана экстрактивная выжимка"
+  ],
+  "controlled_failure_tests": [
+    "timeout",
+    "empty_response",
+    "invalid_json",
+    "invalid_citations",
+    "invalid_semantic_sources",
+    "http_502"
+  ],
+  "tests_passed": 65,
+  "past_incident_reason": "Not recoverable from the copied text; the browser history may retain meta.llm_error.",
+  "browser_check": {
+    "question": "а про deepseek последние какие новости",
+    "answer_mode": "llm",
+    "seconds": 15.1,
+    "source_count": 3,
+    "failure_notice_visible": false,
+    "screenshot": "docs/generation-mode-normal.png"
+  }
+}
