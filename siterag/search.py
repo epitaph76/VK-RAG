@@ -6,6 +6,7 @@ import threading
 import numpy as np
 
 from .index import Snapshot
+from .relevance import expand_query
 
 
 def rrf(rankings):
@@ -79,6 +80,8 @@ class SearchEngine:
                 'rerank_applied': False, 'timings_ms': timings, 'warnings': warnings,
                 'index_version': snapshot.manifest['version'] if snapshot else None,
                 'corpus_hash': snapshot.manifest['corpus_hash'] if snapshot else None}
+        q = expand_query(q)
+        meta['effective_query'] = q
         if not snapshot:
             warnings.append('База ещё не подготовлена. Администратор может запустить сбор.')
             timings['total'] = (time.perf_counter() - started) * 1000
@@ -130,6 +133,8 @@ class SearchEngine:
                 continue
             seen.add(key)
             hits.append(chunk | {'retrieval_score': scores[i], 'rerank_score': None, 'score': scores[i], 'score_type': 'rrf',
+                                 'bm25_score': float(sparse_scores[i]),
+                                 'dense_score': dense_scores.get(i) if dense_scores is not None else None,
                                  'bm25_rank': sparse_ranks.get(i), 'dense_rank': dense_ranks.get(i),
                                  'aliases': list(grouped.get(chunk['content_hash'], {}).values())})
             if len(hits) == 20:

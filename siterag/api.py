@@ -163,7 +163,7 @@ def create_app(settings=None, models=None):
             values = payload.model_dump()
             use_llm = values.pop('use_llm')
             # The answer always has the best five even if the caller requests a smaller search listing.
-            values['limit'] = max(5, values['limit'])
+            values['limit'] = 20  # Admission considers the full candidate pool, then selects up to five.
             return answer(payload.q, run_search(values), cfg, use_llm)
 
     @app.post('/ask')

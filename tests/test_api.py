@@ -52,3 +52,20 @@ def test_password_configuration_rejects_weak_secret(tmp_path):
     import pytest
     with pytest.raises(ValueError):
         create_app(Settings(data_dir=tmp_path, admin_password='short'))
+
+
+def test_ask_rejects_animal_learning_even_when_search_returns_it(tmp_path):
+    from siterag.index import build_index
+    app = client(tmp_path)
+    db = app.app.state.db
+    source = db.add_source('Science', 'html', 'https://example.org/animals')
+    db.upsert(source['id'], 'Обучение животных', source['url'],
+              'Обучение животных: шимпанзе перенимают традиции своей группы. ' * 5)
+    build_index(db, app.app.state.models, app.app.state.engine.settings)
+    params = {'q': 'какие последние новости в ml', 'rerank': 'never'}
+    assert app.get('/search', params=params).json()['hits']
+    response = app.get('/ask', params=params | {'use_llm': False})
+    assert response.status_code == 200
+    assert response.json()['answer'] == 'Недостаточно данных в источниках.'
+    assert response.json()['sources'] == []
+    assert response.json()['meta']['context_filter']['selected_count'] == 0

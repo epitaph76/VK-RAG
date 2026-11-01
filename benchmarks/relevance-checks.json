@@ -1,0 +1,736 @@
+{
+  "checked_at": "2026-11-01T21:08:28.801148+00:00",
+  "environment": "Docker Compose, real multilingual-e5 / Laya / cross-encoder",
+  "checks": [
+    {
+      "q": "какие последние новости в ml",
+      "mode": "auto",
+      "use_llm": true,
+      "http_status": 200,
+      "answer_mode": "extractive",
+      "refusal": true,
+      "answer_excerpt": "Недостаточно данных в источниках.",
+      "sources": [],
+      "meta": {
+        "mode": "auto",
+        "gate": {
+          "decision": "keep",
+          "confidence": 0.5766,
+          "run_rerank": true,
+          "reason": "rerank_or_uncertain"
+        },
+        "rerank_applied": true,
+        "timings_ms": {
+          "bm25": 4.604343999744742,
+          "dense": 6505.70273500125,
+          "fusion": 0.34913899980892893,
+          "gate": 5166.71345100076,
+          "reranker": 5024.85915500074,
+          "total": 17046.41769400041,
+          "context_filter": 0.699245998475817,
+          "generation": 0.003749999450519681,
+          "request_total": 17047.120689998337
+        },
+        "warnings": [
+          "Подходящих фрагментов недостаточно: ответ не сгенерирован"
+        ],
+        "index_version": "100-f749d38fb33b",
+        "corpus_hash": "54b75e7b8585bc428da0be949b31761ff7948f7dcf0293823a3c40c04f58497f",
+        "effective_query": "какие последние новости в ml машинное обучение",
+        "candidate_count": 20,
+        "context_filter": {
+          "policy_version": "context-v1",
+          "methods": [
+            "reranker_logit"
+          ],
+          "input_count": 20,
+          "accepted_count": 0,
+          "selected_count": 0,
+          "rejected": [
+            {
+              "id": "811fba722c469d3adec4c13d:960",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "811fba722c469d3adec4c13d:640",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "1101aa453d93e8451de5b2aa:960",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "811fba722c469d3adec4c13d:5760",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "aa3649c95c88371a8a85a05c:2560",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "811fba722c469d3adec4c13d:5440",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "01dd02a02b0d657724556727:320",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "cb70cc3fbebf95ab9cb41923:0",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "3b6e670d7152e96eab048703:2240",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "e919a9bae33f2ee396f0ecd7:320",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "fc509f6a4f015a0052f788b3:2240",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "811fba722c469d3adec4c13d:320",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "01dd02a02b0d657724556727:0",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "01dd02a02b0d657724556727:2560",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "c34aae67ee1547d96b9ecef7:1280",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "5cc7e07c8692526dc7effd82:1280",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "01dd02a02b0d657724556727:2240",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "01dd02a02b0d657724556727:1280",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "01dd02a02b0d657724556727:3200",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "3afc05885d0377e1245e98c9:1280",
+              "reason": "reranker_below_threshold"
+            }
+          ],
+          "thresholds": {
+            "reranker_logit": 0.0,
+            "dense_cosine": 0.78,
+            "term_coverage": 0.6
+          }
+        }
+      }
+    },
+    {
+      "q": "какие последние новости в ml",
+      "mode": "always",
+      "use_llm": false,
+      "http_status": 200,
+      "answer_mode": "extractive",
+      "refusal": true,
+      "answer_excerpt": "Недостаточно данных в источниках.",
+      "sources": [],
+      "meta": {
+        "mode": "always",
+        "gate": {
+          "decision": "forced",
+          "confidence": null,
+          "run_rerank": true,
+          "reason": "always_mode"
+        },
+        "rerank_applied": true,
+        "timings_ms": {
+          "bm25": 0.7752330002404051,
+          "dense": 24.222525000368478,
+          "fusion": 0.5006320006941678,
+          "reranker": 2722.0359229995665,
+          "total": 2749.091899000632,
+          "context_filter": 0.21624699911626521,
+          "generation": 0.0032669995562173426,
+          "request_total": 2749.3114129993046
+        },
+        "warnings": [
+          "Подходящих фрагментов недостаточно: ответ не сгенерирован"
+        ],
+        "index_version": "100-f749d38fb33b",
+        "corpus_hash": "54b75e7b8585bc428da0be949b31761ff7948f7dcf0293823a3c40c04f58497f",
+        "effective_query": "какие последние новости в ml машинное обучение",
+        "candidate_count": 20,
+        "context_filter": {
+          "policy_version": "context-v1",
+          "methods": [
+            "reranker_logit"
+          ],
+          "input_count": 20,
+          "accepted_count": 0,
+          "selected_count": 0,
+          "rejected": [
+            {
+              "id": "811fba722c469d3adec4c13d:960",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "811fba722c469d3adec4c13d:640",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "1101aa453d93e8451de5b2aa:960",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "811fba722c469d3adec4c13d:5760",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "aa3649c95c88371a8a85a05c:2560",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "811fba722c469d3adec4c13d:5440",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "01dd02a02b0d657724556727:320",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "cb70cc3fbebf95ab9cb41923:0",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "3b6e670d7152e96eab048703:2240",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "e919a9bae33f2ee396f0ecd7:320",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "fc509f6a4f015a0052f788b3:2240",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "811fba722c469d3adec4c13d:320",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "01dd02a02b0d657724556727:0",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "01dd02a02b0d657724556727:2560",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "c34aae67ee1547d96b9ecef7:1280",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "5cc7e07c8692526dc7effd82:1280",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "01dd02a02b0d657724556727:2240",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "01dd02a02b0d657724556727:1280",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "01dd02a02b0d657724556727:3200",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "3afc05885d0377e1245e98c9:1280",
+              "reason": "reranker_below_threshold"
+            }
+          ],
+          "thresholds": {
+            "reranker_logit": 0.0,
+            "dense_cosine": 0.78,
+            "term_coverage": 0.6
+          }
+        }
+      }
+    },
+    {
+      "q": "какие последние новости в ml",
+      "mode": "never",
+      "use_llm": false,
+      "http_status": 200,
+      "answer_mode": "extractive",
+      "refusal": true,
+      "answer_excerpt": "Недостаточно данных в источниках.",
+      "sources": [],
+      "meta": {
+        "mode": "never",
+        "gate": {
+          "decision": "bypass",
+          "confidence": null,
+          "run_rerank": false,
+          "reason": "never_mode"
+        },
+        "rerank_applied": false,
+        "timings_ms": {
+          "bm25": 0.39467900023737457,
+          "dense": 14.915253001163364,
+          "fusion": 0.25793299937504344,
+          "total": 16.36705599958077,
+          "context_filter": 39.36669299946516,
+          "generation": 0.0021230007405392826,
+          "request_total": 55.73587199978647
+        },
+        "warnings": [
+          "Подходящих фрагментов недостаточно: ответ не сгенерирован"
+        ],
+        "index_version": "100-f749d38fb33b",
+        "corpus_hash": "54b75e7b8585bc428da0be949b31761ff7948f7dcf0293823a3c40c04f58497f",
+        "effective_query": "какие последние новости в ml машинное обучение",
+        "candidate_count": 20,
+        "context_filter": {
+          "policy_version": "context-v1",
+          "methods": [
+            "lexical_dense_fallback"
+          ],
+          "input_count": 20,
+          "accepted_count": 0,
+          "selected_count": 0,
+          "rejected": [
+            {
+              "id": "01dd02a02b0d657724556727:0",
+              "reason": "insufficient_query_term_support"
+            },
+            {
+              "id": "811fba722c469d3adec4c13d:320",
+              "reason": "insufficient_query_term_support"
+            },
+            {
+              "id": "5cc7e07c8692526dc7effd82:1280",
+              "reason": "insufficient_query_term_support"
+            },
+            {
+              "id": "811fba722c469d3adec4c13d:640",
+              "reason": "insufficient_query_term_support"
+            },
+            {
+              "id": "811fba722c469d3adec4c13d:960",
+              "reason": "insufficient_query_term_support"
+            },
+            {
+              "id": "c34aae67ee1547d96b9ecef7:1280",
+              "reason": "insufficient_query_term_support"
+            },
+            {
+              "id": "01dd02a02b0d657724556727:2240",
+              "reason": "insufficient_query_term_support"
+            },
+            {
+              "id": "fc509f6a4f015a0052f788b3:2240",
+              "reason": "insufficient_query_term_support"
+            },
+            {
+              "id": "01dd02a02b0d657724556727:2560",
+              "reason": "insufficient_query_term_support"
+            },
+            {
+              "id": "e919a9bae33f2ee396f0ecd7:320",
+              "reason": "insufficient_query_term_support"
+            },
+            {
+              "id": "01dd02a02b0d657724556727:1280",
+              "reason": "insufficient_query_term_support"
+            },
+            {
+              "id": "811fba722c469d3adec4c13d:5760",
+              "reason": "insufficient_query_term_support"
+            },
+            {
+              "id": "01dd02a02b0d657724556727:320",
+              "reason": "insufficient_query_term_support"
+            },
+            {
+              "id": "aa3649c95c88371a8a85a05c:2560",
+              "reason": "insufficient_query_term_support"
+            },
+            {
+              "id": "3afc05885d0377e1245e98c9:1280",
+              "reason": "insufficient_query_term_support"
+            },
+            {
+              "id": "811fba722c469d3adec4c13d:5440",
+              "reason": "insufficient_query_term_support"
+            },
+            {
+              "id": "01dd02a02b0d657724556727:3200",
+              "reason": "insufficient_query_term_support"
+            },
+            {
+              "id": "1101aa453d93e8451de5b2aa:960",
+              "reason": "insufficient_query_term_support"
+            },
+            {
+              "id": "3b6e670d7152e96eab048703:2240",
+              "reason": "insufficient_query_term_support"
+            },
+            {
+              "id": "cb70cc3fbebf95ab9cb41923:0",
+              "reason": "insufficient_query_term_support"
+            }
+          ],
+          "thresholds": {
+            "reranker_logit": 0.0,
+            "dense_cosine": 0.78,
+            "term_coverage": 0.6
+          }
+        }
+      }
+    },
+    {
+      "q": "Почему древнейшего осьминога признали наутилусом?",
+      "mode": "auto",
+      "use_llm": false,
+      "http_status": 200,
+      "answer_mode": "extractive",
+      "refusal": false,
+      "answer_excerpt": "Выдержки из найденных материалов:\n\nший на тот момент ископаемый осьминог был известен из верхнего мела (85 млн лет). Палеонтологами такой громадный «временной скачок» был встречен ",
+      "sources": [
+        {
+          "id": "f1ca3535e8b776f225d8abe8:320",
+          "title": "Древнейший осьминог оказался наутилусом • Новости науки",
+          "url": "https://elementy.ru/novosti_nauki/434442/Drevneyshiy_osminog_okazalsya_nautilusom",
+          "rerank_score": 2.7456274032592773,
+          "dense_score": 0.869687557220459
+        },
+        {
+          "id": "f1ca3535e8b776f225d8abe8:2880",
+          "title": "Древнейший осьминог оказался наутилусом • Новости науки",
+          "url": "https://elementy.ru/novosti_nauki/434442/Drevneyshiy_osminog_okazalsya_nautilusom",
+          "rerank_score": 1.462409257888794,
+          "dense_score": 0.8524755239486694
+        },
+        {
+          "id": "f1ca3535e8b776f225d8abe8:3840",
+          "title": "Древнейший осьминог оказался наутилусом • Новости науки",
+          "url": "https://elementy.ru/novosti_nauki/434442/Drevneyshiy_osminog_okazalsya_nautilusom",
+          "rerank_score": 0.8926703333854675,
+          "dense_score": 0.8368929028511047
+        },
+        {
+          "id": "f1ca3535e8b776f225d8abe8:6400",
+          "title": "Древнейший осьминог оказался наутилусом • Новости науки",
+          "url": "https://elementy.ru/novosti_nauki/434442/Drevneyshiy_osminog_okazalsya_nautilusom",
+          "rerank_score": 0.6666487455368042,
+          "dense_score": 0.8336259722709656
+        },
+        {
+          "id": "f1ca3535e8b776f225d8abe8:2560",
+          "title": "Древнейший осьминог оказался наутилусом • Новости науки",
+          "url": "https://elementy.ru/novosti_nauki/434442/Drevneyshiy_osminog_okazalsya_nautilusom",
+          "rerank_score": 0.2837809920310974,
+          "dense_score": 0.8369672298431396
+        }
+      ],
+      "meta": {
+        "mode": "auto",
+        "gate": {
+          "decision": "keep",
+          "confidence": 0.5519,
+          "run_rerank": true,
+          "reason": "rerank_or_uncertain"
+        },
+        "rerank_applied": true,
+        "timings_ms": {
+          "bm25": 0.4511579991230974,
+          "dense": 17.470860000685207,
+          "fusion": 0.7026080002106028,
+          "gate": 4164.446521001082,
+          "reranker": 3580.1435239991406,
+          "total": 7764.008232999913,
+          "context_filter": 0.5892990011489019,
+          "generation": 1.0719580004661111,
+          "request_total": 7765.669490001528
+        },
+        "warnings": [],
+        "index_version": "100-f749d38fb33b",
+        "corpus_hash": "54b75e7b8585bc428da0be949b31761ff7948f7dcf0293823a3c40c04f58497f",
+        "effective_query": "Почему древнейшего осьминога признали наутилусом?",
+        "candidate_count": 20,
+        "context_filter": {
+          "policy_version": "context-v1",
+          "methods": [
+            "reranker_logit"
+          ],
+          "input_count": 20,
+          "accepted_count": 5,
+          "selected_count": 5,
+          "rejected": [
+            {
+              "id": "f1ca3535e8b776f225d8abe8:1920",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "f1ca3535e8b776f225d8abe8:4480",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "f1ca3535e8b776f225d8abe8:0",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "f1ca3535e8b776f225d8abe8:5760",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "712a6504c9268a0a8799ac93:1920",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "f1ca3535e8b776f225d8abe8:5120",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "f1ca3535e8b776f225d8abe8:1280",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "f1ca3535e8b776f225d8abe8:7040",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "f1ca3535e8b776f225d8abe8:640",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "f1ca3535e8b776f225d8abe8:1600",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "f1ca3535e8b776f225d8abe8:6080",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "f1ca3535e8b776f225d8abe8:4160",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "f1ca3535e8b776f225d8abe8:6720",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "f1ca3535e8b776f225d8abe8:2240",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "f1ca3535e8b776f225d8abe8:3520",
+              "reason": "reranker_below_threshold"
+            }
+          ],
+          "thresholds": {
+            "reranker_logit": 0.0,
+            "dense_cosine": 0.78,
+            "term_coverage": 0.6
+          }
+        }
+      }
+    },
+    {
+      "q": "Как оформить визу в Японию?",
+      "mode": "auto",
+      "use_llm": true,
+      "http_status": 200,
+      "answer_mode": "extractive",
+      "refusal": true,
+      "answer_excerpt": "Недостаточно данных в источниках.",
+      "sources": [],
+      "meta": {
+        "mode": "auto",
+        "gate": {
+          "decision": "rerank",
+          "confidence": 0.8312,
+          "run_rerank": true,
+          "reason": "rerank_or_uncertain"
+        },
+        "rerank_applied": true,
+        "timings_ms": {
+          "bm25": 0.9205900005326839,
+          "dense": 22.221929000806995,
+          "fusion": 0.7905750007921597,
+          "gate": 3970.546180000383,
+          "reranker": 3544.9170989995764,
+          "total": 7541.400788999454,
+          "context_filter": 0.31962300090526696,
+          "generation": 0.003168999683111906,
+          "request_total": 7541.723581000042
+        },
+        "warnings": [
+          "Подходящих фрагментов недостаточно: ответ не сгенерирован"
+        ],
+        "index_version": "100-f749d38fb33b",
+        "corpus_hash": "54b75e7b8585bc428da0be949b31761ff7948f7dcf0293823a3c40c04f58497f",
+        "effective_query": "Как оформить визу в Японию?",
+        "candidate_count": 20,
+        "context_filter": {
+          "policy_version": "context-v1",
+          "methods": [
+            "reranker_logit"
+          ],
+          "input_count": 20,
+          "accepted_count": 0,
+          "selected_count": 0,
+          "rejected": [
+            {
+              "id": "37278a516e009077e6f41588:3520",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "e919a9bae33f2ee396f0ecd7:2240",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "e919a9bae33f2ee396f0ecd7:2560",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "cf2dc23856322590e039bc72:3200",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "6ae5d41416e4e974d04bf98b:1280",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "37278a516e009077e6f41588:3840",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "aa3649c95c88371a8a85a05c:2880",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "65aed51838104341775dc93b:1600",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "6ae5d41416e4e974d04bf98b:0",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "6c0253acc2328d752e150873:320",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "aa3649c95c88371a8a85a05c:0",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "6ae5d41416e4e974d04bf98b:960",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "8c649e44964d31502e0242f5:960",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "aa3649c95c88371a8a85a05c:3840",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "a4fc23c3b2f73b1c838ee41a:0",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "01dd02a02b0d657724556727:2880",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "01dd02a02b0d657724556727:1920",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "65aed51838104341775dc93b:0",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "dd75e9b40ef502cc43e9ba9b:2880",
+              "reason": "reranker_below_threshold"
+            },
+            {
+              "id": "954e56354f92ec4cb8b9d013:3520",
+              "reason": "reranker_below_threshold"
+            }
+          ],
+          "thresholds": {
+            "reranker_logit": 0.0,
+            "dense_cosine": 0.78,
+            "term_coverage": 0.6
+          }
+        }
+      }
+    }
+  ],
+  "before": {
+    "q": "какие последние новости в ml",
+    "mode": "auto",
+    "index_version": "100-f749d38fb33b",
+    "gate": {
+      "decision": "rerank",
+      "confidence": 0.8261,
+      "run_rerank": true,
+      "reason": "rerank_or_uncertain"
+    },
+    "candidate_count": 20,
+    "top_candidates": [
+      {
+        "id": "cb70cc3fbebf95ab9cb41923:0",
+        "title": "Нобелевская премия по физиологии и медицине — 2026 • Новости науки",
+        "url": "https://elementy.ru/novosti_nauki/434440/Nobelevskaya_premiya_po_fiziologii_i_meditsine_2026",
+        "rerank_score": -2.0487940311431885
+      },
+      {
+        "id": "811fba722c469d3adec4c13d:5760",
+        "title": "Агентский поиск на open-source моделях: 7 поисковых инструментов, 16 моделей и одна компания",
+        "url": "https://habr.com/ru/articles/1102340/",
+        "rerank_score": -2.1292531490325928
+      },
+      {
+        "id": "811fba722c469d3adec4c13d:4800",
+        "title": "Агентский поиск на open-source моделях: 7 поисковых инструментов, 16 моделей и одна компания",
+        "url": "https://habr.com/ru/articles/1102340/",
+        "rerank_score": -2.405750036239624
+      },
+      {
+        "id": "d7393cc925dcc33b8e00700a:3840",
+        "title": "Спросите Итана: Что делать, если уважаемая теория оказывается ложной?",
+        "url": "https://habr.com/ru/articles/1102210/",
+        "rerank_score": -2.652217149734497
+      },
+      {
+        "id": "811fba722c469d3adec4c13d:5440",
+        "title": "Агентский поиск на open-source моделях: 7 поисковых инструментов, 16 моделей и одна компания",
+        "url": "https://habr.com/ru/articles/1102340/",
+        "rerank_score": -3.657514810562134
+      }
+    ]
+  },
+  "limitations": [
+    "Conservative uncalibrated thresholds may reject useful evidence.",
+    "Five live checks are smoke tests, not an independent quality benchmark.",
+    "Browser verification was blocked because the UI tool could not reliably identify the Chrome URL."
+  ]
+}

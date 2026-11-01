@@ -14,6 +14,7 @@ dependencies = [
   "numpy>=2.0,<3", "bm25s>=0.3,<0.4", "faiss-cpu>=1.10,<2",
   "sentence-transformers>=6.0,<7", "laya==0.4.18", "transformers>=5.0,<6",
   "huggingface-hub>=2.0,<3", "torch>=2.8,<3", "filelock>=4.0,<5",
+  "snowballstemmer==3.1.1",
 ]
 
 [project.optional-dependencies]

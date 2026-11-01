@@ -52,7 +52,8 @@ class Models:
                     instance = Router(models={'multilingual': self.snapshot(cfg.laya_model, cfg.laya_revision)}, device='cpu', max_loaded=1)
                 elif kind == 'reranker':
                     from sentence_transformers import CrossEncoder
-                    instance = CrossEncoder(self.snapshot(cfg.reranker_model, cfg.reranker_revision), device='cpu', max_length=512, trust_remote_code=False)
+                    instance = CrossEncoder(self.snapshot(cfg.reranker_model, cfg.reranker_revision), device='cpu', max_length=512,
+                                            activation_fn=torch.nn.Identity(), trust_remote_code=False)
                 else:
                     raise ValueError('Unknown model')
                 self.instances[kind] = instance

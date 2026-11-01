@@ -17,6 +17,9 @@ class Settings:
     chunk_tokens: int = 384
     overlap: int = 64
     gate_threshold: float = float(os.getenv("LAYA_KEEP_THRESHOLD", "0.8"))
+    context_min_rerank_score: float = float(os.getenv("CONTEXT_MIN_RERANK_SCORE", "0"))
+    context_min_dense_score: float = float(os.getenv("CONTEXT_MIN_DENSE_SCORE", "0.78"))
+    context_min_term_coverage: float = float(os.getenv("CONTEXT_MIN_TERM_COVERAGE", "0.6"))
     models_enabled: bool = os.getenv("MODELS_ENABLED", "1") == "1"
     api_key: str = os.getenv("SUB2API_API_KEY", "")
     api_url: str = os.getenv("SUB2API_BASE_URL", "").rstrip("/")
