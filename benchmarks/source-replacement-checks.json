@@ -1,0 +1,68 @@
+{
+  "checked_at": "2026-11-01T20:29:50.968638+00:00",
+  "environment": "Docker worker, default HTTPS transport with certificate validation",
+  "source": {
+    "name": "Элементы · наука",
+    "url": "https://elementy.ru/rss/news"
+  },
+  "repeat_collect": {
+    "fetched": 10,
+    "changed": 0,
+    "skipped": 0,
+    "errors": []
+  },
+  "repeat_seconds": 10.63,
+  "articles": 10,
+  "articles_with_dates": 10,
+  "archived_nplus1_documents": 15,
+  "active_sources": [
+    "Хабр · статьи",
+    "Элементы · наука"
+  ],
+  "job_state": "done",
+  "index": {
+    "version": "92-8cc8b55e1fbe",
+    "documents": 50,
+    "chunks": 644,
+    "dense": true,
+    "corpus_hash": "1852bf482341d528f3003001ab689d8f124616ebbcfbd088709bf5051bbeb2a0",
+    "warnings": []
+  },
+  "first_collect": [
+    {
+      "source": "Элементы · наука",
+      "fetched": 10,
+      "changed": 10,
+      "skipped": 0,
+      "errors": []
+    }
+  ],
+  "job_errors": [],
+  "search_check": {
+    "question": "Почему древнейшего осьминога признали наутилусом?",
+    "http_status": 200,
+    "answer_mode": "extractive",
+    "source_count": 5,
+    "source_urls": [
+      "https://elementy.ru/novosti_nauki/434442/Drevneyshiy_osminog_okazalsya_nautilusom"
+    ],
+    "gate": {
+      "decision": "keep",
+      "confidence": 0.5519,
+      "run_rerank": true,
+      "reason": "rerank_or_uncertain"
+    },
+    "rerank_applied": true,
+    "warnings": [],
+    "index_version": "92-8cc8b55e1fbe",
+    "request_seconds": 5.97
+  },
+  "browser_check": {
+    "admin_job_done": true,
+    "source_filter": "Элементы · наука",
+    "answer_with_citations_and_source_cards": true,
+    "answer_mode": "extractive",
+    "llm_fallback_warning_observed": true,
+    "screenshot": "docs/source-replacement.png"
+  }
+}

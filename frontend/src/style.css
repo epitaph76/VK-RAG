@@ -9,4 +9,5 @@
 .logo-dot,.logo-mark,.nav.active,.filter-button.enabled{color:var(--accent)}.status-pill{background:#edf5ff;border-color:#d6e7ff;color:#5279a6}.status-pill>span,.source-dot,.green-square{background:#0077ff}.evidence-title,.read-fragment,.answer-text a{color:#2468bd}.reference-index{background:#e8f2ff;color:#0077ff}.send,.primary{background:#0077ff;border-color:#0077ff}.send:not(:disabled):hover,.primary:hover{background:#0066d9}.toggle.on{background:#0077ff}
 
 /* Keep evidence next to the current answer as conversation history grows. */
+.job-state.partial{background:#fff1d6;color:#8a5200}.job-sources{flex-basis:100%;font-size:13px;line-height:1.6;color:var(--muted)}.job-sources p{margin:3px 0}.job-sources strong{font-weight:500}
 .topbar{position:sticky;top:0;z-index:15}.evidence{position:sticky;top:79px;height:calc(100vh - 79px);overflow-y:auto;align-self:start}.evidence-list{flex:1}.evidence-bottom{flex-shrink:0}@media(max-width:900px) and (min-width:701px){.evidence{top:65px;height:calc(100vh - 65px)}}@media(max-width:700px){.evidence{position:static;height:auto;overflow:visible;align-self:stretch}}

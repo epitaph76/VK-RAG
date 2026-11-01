@@ -23,13 +23,21 @@ def run_job(db, models, cfg, job):
                                  lambda done, total, report: db.job_update(ident, progress=done, total=total, result=report))
                 results.append({'source': source['name'], **report})
                 source_error = f"Не загружено страниц: {report['skipped']}" if report['skipped'] else None
+                if source_error:
+                    errors.append({'source': source['name'], 'error': source_error})
             except Exception as error:
                 source_error = str(error)[:200]
                 errors.append({'source': source['name'], 'error': source_error})
             with db.connect() as connection:
                 connection.execute('UPDATE sources SET last_run=?,last_error=? WHERE id=?', (now(), source_error, source['id']))
     manifest = build_index(db, models, cfg, lambda done, total: db.job_update(ident, progress=done, total=total))
-    db.job_update(ident, state='done', finished_at=now(), result={'sources': results, 'errors': errors, 'index': manifest}, error='Часть источников недоступна' if errors else None)
+    state, message = 'done', None
+    if errors:
+        if any(report['fetched'] for report in results):
+            state, message = 'partial', 'Обновление выполнено частично. Подробности по источникам ниже.'
+        else:
+            state, message = 'failed', 'Не удалось загрузить статьи. Ранее сохранённые материалы остаются доступны.'
+    db.job_update(ident, state=state, finished_at=now(), result={'sources': results, 'errors': errors, 'index': manifest}, error=message)
 
 
 def main():

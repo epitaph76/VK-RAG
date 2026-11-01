@@ -179,3 +179,54 @@ def test_benchmark_rejects_a_different_corpus(fixture, tmp_path):
 def test_nplus1_layout_change_does_not_import_the_entire_page():
     with pytest.raises(FetchError, match='границы основного текста'):
         parse_article('<title>Article</title><p>' + 'Text and related article previews. ' * 20 + '</p>', 'https://nplus1.ru/news/example')
+
+
+def test_default_source_migration_preserves_documents_and_user_choices(tmp_path):
+    db = Database(tmp_path / 'rag.sqlite3')
+    old = db.add_source('N+1 · наука', 'rss', 'https://nplus1.ru/rss')
+    custom = db.add_source('Мой источник', 'rss', 'https://example.org/rss')
+    db.upsert(old['id'], 'Архивная статья', 'https://nplus1.ru/news/archive', 'Сохранённый текст')
+    db.seed()
+    replacement = next(s for s in db.sources() if s['url'] == 'https://elementy.ru/rss/news')
+    assert not db.source(old['id'])['enabled']
+    assert db.source(custom['id'])['enabled']
+    with db.connect() as connection:
+        assert connection.execute('SELECT COUNT(*) FROM documents').fetchone()[0] == 1
+    assert not db.documents()  # The archive remains stored but is excluded from search.
+    db.enable(replacement['id'], False)
+    db.enable(old['id'], True)  # A later explicit administrator choice must survive restarts.
+    db.seed()
+    assert not db.source(replacement['id'])['enabled']
+    assert db.source(old['id'])['enabled']
+    assert len(db.sources()) == 4
+
+
+def test_elementy_body_excludes_comments_and_recommendations():
+    body = 'Основной текст исследования: результаты и объяснение эксперимента. ' * 5
+    html = ('<title>Открытие</title><nav>Меню</nav><div class="itemblock">'
+            '<div class="memo"><p>' + body + '</p></div>'
+            '<div class="forumctrls">Комментарии пользователей</div></div>'
+            '<div class="other_block">Другие новости</div>')
+    doc = parse_article(html, 'https://elementy.ru/novosti_nauki/example')
+    assert doc['text'] == body.strip()
+    with pytest.raises(FetchError, match='границы основного текста'):
+        parse_article('<title>Ошибка</title><p>' + body + '</p>', doc['url'])
+
+
+@pytest.mark.parametrize('fetched,skipped,expected', [(2, 0, 'done'), (2, 1, 'partial'), (0, 1, 'failed')])
+def test_worker_reports_page_failures_and_keeps_saved_data(fixture, monkeypatch, fetched, skipped, expected):
+    from siterag.worker import run_job
+    db, models, cfg, source = fixture
+    documents = db.documents()
+    monkeypatch.setattr('siterag.worker.collect', lambda *args: {
+        'fetched': fetched, 'changed': 0, 'skipped': skipped,
+        'errors': [{'url': 'https://example.org/timeout', 'error': 'Таймаут'}] if skipped else [],
+    })
+    ident = db.enqueue('ingest', source['id'])
+    run_job(db, models, cfg, db.claim('test'))
+    job = next(j for j in db.jobs() if j['id'] == ident)
+    assert job['state'] == expected
+    assert bool(job['error']) == bool(skipped)
+    assert bool(db.source(source['id'])['last_error']) == bool(skipped)
+    assert db.documents() == documents
+    assert SearchEngine(db, models, cfg).search('alpha', rerank='never')['hits']

@@ -55,11 +55,20 @@ class Database:
             db.close()
 
     def seed(self):
-        for name, url in [
-            ("Хабр · статьи", "https://habr.com/ru/rss/articles/?fl=ru"),
-            ("N+1 · наука", "https://nplus1.ru/rss"),
-        ]:
-            with self.connect() as db:
+        with self.connect() as db:
+            db.execute("BEGIN IMMEDIATE")
+            # Migrate the old default once; keep its documents and user-created sources.
+            if not db.execute("SELECT 1 FROM metadata WHERE key='source_defaults_v2'").fetchone():
+                changed = db.execute("""UPDATE sources SET enabled=0
+                    WHERE name=? AND url=? AND enabled=1""",
+                    ("N+1 · наука", "https://nplus1.ru/rss")).rowcount
+                if changed:
+                    self.bump(db)
+                db.execute("INSERT INTO metadata VALUES ('source_defaults_v2', '1')")
+            for name, url in [
+                ("Хабр · статьи", "https://habr.com/ru/rss/articles/?fl=ru"),
+                ("Элементы · наука", "https://elementy.ru/rss/news"),
+            ]:
                 db.execute("INSERT OR IGNORE INTO sources(id,name,kind,url,created_at) VALUES(?,?,?,?,?)",
                            (uuid.uuid4().hex, name, "rss", url, now()))
 

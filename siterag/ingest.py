@@ -107,7 +107,12 @@ def parse_article(html, url):
                 break
     # Source-specific article containers avoid comments, menus, and recommendations.
     selectors = ('#post-content-body', '.tm-article-body', '.topic-body', 'article')
-    if urlsplit(url).hostname in ('nplus1.ru', 'www.nplus1.ru', 'nplus-1.ru'):
+    hostname = urlsplit(url).hostname
+    if hostname in ('elementy.ru', 'www.elementy.ru'):
+        container = soup.select_one('.itemblock > .memo')
+        if container is None:
+            raise FetchError('Не найдены границы основного текста «Элементов»; страница пропущена')
+    elif hostname in ('nplus1.ru', 'www.nplus1.ru', 'nplus-1.ru'):
         container = soup.select_one('[data-heading-wrap] [data-lmb-0]')
         if container is None:
             raise FetchError('Не найдены границы основного текста N+1; страница пропущена')
