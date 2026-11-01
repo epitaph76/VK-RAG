@@ -155,3 +155,27 @@ def test_jobs_are_persisted_and_claimed_once(fixture):
     assert db.enqueue('ingest', source['id']) == ident
     assert db.claim('a')['id'] == ident
     assert Database(db.path).claim('b') is None
+
+
+def test_nplus1_body_excludes_next_preview_and_reads_jsonld_date():
+    body = 'Основной текст исследования о гориллах и их взаимодействии. ' * 4
+    html = ('<title>Гориллы</title><script type="application/ld+json">'
+            '{"@type":"NewsArticle","datePublished":"2026-10-30T17:45:00+03:00"}</script>'
+            '<div data-heading-wrap><div data-lmb-0>' + body +
+            '<div data-lmb-0>Сноска относится к этой статье.</div></div></div>'
+            '<aside><div data-lmb-0>Анонс следующей статьи: орангутаны и смех.</div></aside>')
+    doc = parse_article(html, 'https://nplus1.ru/news/2026/10/30/example')
+    assert 'орангутаны' not in doc['text'] and 'Сноска' in doc['text']
+    assert doc['published_at'] == '2026-10-30T14:45:00+00:00'
+
+
+def test_benchmark_rejects_a_different_corpus(fixture, tmp_path):
+    from siterag.evaluation import evaluate
+    db, models, cfg, _ = fixture
+    with pytest.raises(ValueError, match='Корпус отличается'):
+        evaluate(SearchEngine(db, models, cfg), 'benchmarks/questions.jsonl', tmp_path / 'results.json')
+
+
+def test_nplus1_layout_change_does_not_import_the_entire_page():
+    with pytest.raises(FetchError, match='границы основного текста'):
+        parse_article('<title>Article</title><p>' + 'Text and related article previews. ' * 20 + '</p>', 'https://nplus1.ru/news/example')

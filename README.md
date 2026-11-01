@@ -91,6 +91,8 @@ docker compose exec api site-rag models
 docker compose exec api site-rag evaluate
 ```
 
+Для оценки через уже работающий API без второй копии моделей: `docker compose exec api site-rag evaluate --api-url http://127.0.0.1:8000`. JSON сохраняется в `/data/reports/results.json` на постоянном томе; `--output` позволяет выбрать другой доступный для записи путь. Оценка отклоняет корпус, хеш которого отличается от `benchmarks/corpus-manifest.json`.
+
 CLI `collect` не перестраивает индекс автоматически; очередь в админке выполняет оба этапа. Для чистого измерения остановите публичные запросы и не запускайте одновременно несколько ML-процессов. [Методика и ограничения](benchmarks/README.md), [результаты](benchmarks/results.json), [отчёт о проверках](VALIDATION.md).
 
 Для разработки: Python 3.12, CPU PyTorch, `pip install -r requirements.lock.txt`, `pip install -e '.[test]'`; затем `python -m pytest -q`. Frontend: `cd frontend`, `npm ci`, `npm run dev`. Backend: `uvicorn siterag.api:app --port 8091 --no-access-log --no-proxy-headers`. Переменные из `.env` надо передать в процесс; само приложение файл не читает.

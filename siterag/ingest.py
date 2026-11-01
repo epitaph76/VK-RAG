@@ -1,4 +1,5 @@
 import calendar
+import json
 import ipaddress
 import re
 import socket
@@ -44,7 +45,7 @@ def fetch(url):
     for _ in range(5):
         url = validate_public_url(url)
         try:
-            response = requests.get(url, headers={'User-Agent': 'SiteRAG/1.0 (research; manual ingestion)'},
+            response = requests.get(url, headers={'User-Agent': requests.utils.default_user_agent()},
                                     allow_redirects=False, timeout=(10, 25), stream=True)
             with response:
                 if response.is_redirect:
@@ -90,9 +91,29 @@ def parse_article(html, url):
     date_tag = soup.find('meta', property='article:published_time') or soup.find('meta', attrs={'name': 'date'})
     time_tag = soup.find('time', datetime=True)
     published = normalize_date(date_tag.get('content') if date_tag else time_tag.get('datetime') if time_tag else None)
+    if not published:
+        for script in soup.find_all('script', type='application/ld+json'):
+            try:
+                payload = json.loads(script.string or script.get_text())
+                nodes = payload if isinstance(payload, list) else payload.get('@graph', [payload])
+                for node in nodes:
+                    if isinstance(node, dict) and node.get('@type') in ('NewsArticle', 'Article'):
+                        published = normalize_date(node.get('datePublished'))
+                        if published:
+                            break
+            except (ValueError, TypeError, AttributeError):
+                continue
+            if published:
+                break
     # Source-specific article containers avoid comments, menus, and recommendations.
-    container = next((node for selector in ('#post-content-body', '.tm-article-body', '.topic-body', 'article')
-                      if (node := soup.select_one(selector)) is not None), None)
+    selectors = ('#post-content-body', '.tm-article-body', '.topic-body', 'article')
+    if urlsplit(url).hostname in ('nplus1.ru', 'www.nplus1.ru', 'nplus-1.ru'):
+        container = soup.select_one('[data-heading-wrap] [data-lmb-0]')
+        if container is None:
+            raise FetchError('Не найдены границы основного текста N+1; страница пропущена')
+    else:
+        container = next((node for selector in selectors
+                          if (node := soup.select_one(selector)) is not None), None)
     if container:
         for node in container.select('script,style,nav,footer,form,aside'):
             node.decompose()

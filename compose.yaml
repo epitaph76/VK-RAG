@@ -17,6 +17,7 @@ services:
     <<: *backend
     environment:
       <<: *environment
+      ROOT_PATH: /api
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Set ADMIN_PASSWORD in .env}
       SESSION_SECRET: ${SESSION_SECRET:?Set SESSION_SECRET in .env}
       SECURE_COOKIE: ${SECURE_COOKIE:-0}

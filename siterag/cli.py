@@ -16,6 +16,8 @@ def main():
     parser.add_argument('--q', default='Что такое искусственный интеллект?')
     parser.add_argument('--mode', choices=['auto', 'never', 'always'], default='auto')
     parser.add_argument('--questions', default='benchmarks/questions.jsonl')
+    parser.add_argument('--api-url', help='For evaluate: measure a running API without a second ML process')
+    parser.add_argument('--output', help='Evaluation JSON path; default DATA_DIR/reports/results.json')
     args = parser.parse_args()
     cfg = Settings()
     db = Database(cfg.database)
@@ -37,8 +39,9 @@ def main():
             print(f'{kind}: ready', flush=True)
         print(json.dumps(models.status(), ensure_ascii=False))
     elif args.command == 'evaluate':
-        from .evaluation import evaluate
-        print(json.dumps(evaluate(SearchEngine(db, models, cfg), args.questions), ensure_ascii=False, indent=2))
+        from .evaluation import evaluate, HTTPBenchmarkEngine
+        engine = HTTPBenchmarkEngine(args.api_url, cfg) if args.api_url else SearchEngine(db, models, cfg)
+        print(json.dumps(evaluate(engine, args.questions, args.output), ensure_ascii=False, indent=2))
     else:
         print(json.dumps(SearchEngine(db, models, cfg).search(args.q, rerank=args.mode), ensure_ascii=False, indent=2))
 

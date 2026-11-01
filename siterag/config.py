@@ -6,6 +6,7 @@ from pathlib import Path
 @dataclass(frozen=True)
 class Settings:
     data_dir: Path = Path(os.getenv("DATA_DIR", "data"))
+    root_path: str = os.getenv("ROOT_PATH", "")
     embedding_model: str = "intfloat/multilingual-e5-small"
     embedding_revision: str = "614241f622f53c4eeff9890bdc4f31cfecc418b3"
     laya_model: str = "convaiinnovations/laya-multilingual"

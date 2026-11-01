@@ -29,7 +29,7 @@ class RateLimiter:
     def check(self, key, limit):
         with self.lock:
             current = time.monotonic()
-            if len(self.entries) > 10000:
+            if len(self.entries) >= 10000:
                 for old in list(self.entries):
                     if not self.entries[old] or self.entries[old][-1] < current - 60:
                         del self.entries[old]
@@ -84,7 +84,7 @@ def create_app(settings=None, models=None):
     serializer = URLSafeTimedSerializer(cfg.session_secret or secrets.token_hex(32), salt='siterag-admin-v1-' + hashlib.sha256(cfg.admin_password.encode()).hexdigest())
     slots = threading.BoundedSemaphore(cfg.queue_size + 1)
     pipeline = threading.Lock()
-    app = FastAPI(title='Срез · Site RAG', version='1.0.0')
+    app = FastAPI(title='Срез · Site RAG', version='1.0.0', root_path=cfg.root_path)
     app.state.db, app.state.engine, app.state.models = db, engine, models
 
     @app.middleware('http')

@@ -1,25 +1,25 @@
 {
-  "generated_at": "2026-11-01T18:58:08.914259+00:00",
+  "generated_at": "2026-11-01T19:34:13.474826+00:00",
   "acquisition_date": "2026-11-01",
-  "corpus_hash": "262fa5c26595c2b73f203991086074ec14e210aeae16055f764bde389dc94ca4",
+  "corpus_hash": "c8deb43519468f2660a4d95dc2006fd89c72aa418db487cd226f592666d72c4d",
   "documents": [
     {
       "id": "04a26f8db204b0b68472764a",
       "title": "Смех сородичей сделал награду привлекательнее для орангутанов",
       "url": "https://nplus1.ru/news/2026/10/30/the-power-of-laughter",
-      "content_hash": "f1130560dab07466982e6ab6c652aa98486c30cf19afe126a4a4dca37d219e0e",
+      "content_hash": "41695f62e06439389fd87dfcb59d1f34334eff2aeba02a6ded5a4d8e86e16b2a",
       "source_name": "N+1 · наука",
       "published_at": null,
-      "fetched_at": "2026-11-01T18:54:51.721043+00:00"
+      "fetched_at": "2026-11-01T19:32:44.715812+00:00"
     },
     {
       "id": "0f7f63e9eb1141cd708d8c92",
       "title": "Горилла подставила сестре спину для доступа к высокой ветке",
       "url": "https://nplus1.ru/news/2026/10/30/cooperation-in-gorillas",
-      "content_hash": "26e39f221b88ea58282a655b16eebc1b297a17ae698da7ba7b43337d9b9bc587",
+      "content_hash": "630127a1102ce95a174d89e500eeec085b3b83233509bd7c532cc1b9fb28c9c7",
       "source_name": "N+1 · наука",
       "published_at": "2026-10-30T14:45:00+00:00",
-      "fetched_at": "2026-11-01T18:50:38.210695+00:00"
+      "fetched_at": "2026-11-01T19:32:44.722703+00:00"
     },
     {
       "id": "1b864dd8ec381deb99d765d7",
@@ -34,10 +34,10 @@
       "id": "20d556d391d774635f265557",
       "title": "Клейкая лента защитила дверь от 99 процентов паводковой воды",
       "url": "https://nplus1.ru/news/2026/10/30/lipkaya-lenta",
-      "content_hash": "6647d1c5a1cdda96484352be48cfac6c3a79c2a2fc316d6d012c6fc8b4dba5e3",
+      "content_hash": "8c8026446761c3619f21e88d75e5029ef5fdf572ff25b4062691673adf3da470",
       "source_name": "N+1 · наука",
       "published_at": "2026-10-30T15:21:00+00:00",
-      "fetched_at": "2026-11-01T18:50:36.482526+00:00"
+      "fetched_at": "2026-11-01T19:32:44.727045+00:00"
     },
     {
       "id": "2364495fa3739cbfbf667025",
@@ -52,37 +52,37 @@
       "id": "2c52eb00df00c842e0c9139e",
       "title": "После удаления селезенки ее ткань снова разрослась у молодого американца",
       "url": "https://nplus1.ru/news/2026/10/29/splenosis",
-      "content_hash": "1f703b229f6a721f11818b8bc5d090f84c9fbe294f059c92f234ae115c830071",
+      "content_hash": "f81babc9232670b61927c8b41ebf1ec1c8391e10cd6d8eee1025ed61eb1209a4",
       "source_name": "N+1 · наука",
       "published_at": null,
-      "fetched_at": "2026-11-01T18:54:53.770618+00:00"
+      "fetched_at": "2026-11-01T19:32:44.738027+00:00"
     },
     {
       "id": "2e197496bf068ec615763d80",
       "title": "ИИ-агенты Axiom Math формализовали доказательство самой длинной теоремы в истории математики",
       "url": "https://nplus1.ru/news/2026/10/28/big-math-ai",
-      "content_hash": "5b3ad5f816d3de89ea7662ba869acb70a638e212941017cee3173a303b158de4",
+      "content_hash": "4e86ab60d0fe018557000f264547e3a949a15dece49d620868d134083d76877c",
       "source_name": "N+1 · наука",
       "published_at": null,
-      "fetched_at": "2026-11-01T18:54:53.902599+00:00"
+      "fetched_at": "2026-11-01T19:32:44.743374+00:00"
     },
     {
       "id": "36b825bd748ddb31ecb52b21",
       "title": "Солнечная погода помогла самцам златок разглядеть блеск потенциальных самок",
       "url": "https://nplus1.ru/news/2026/10/30/beetle-gloss",
-      "content_hash": "a800e70003577c2d947522ee4b9e829d8fc38f516477b5e2df3a2f0a1c4cfe05",
+      "content_hash": "40693bd3ec5c12a6af0a127df6bd6ecf098cad2d9fd0a596242bdd55cd6298eb",
       "source_name": "N+1 · наука",
       "published_at": "2026-10-30T12:38:00+00:00",
-      "fetched_at": "2026-11-01T18:50:41.407756+00:00"
+      "fetched_at": "2026-11-01T19:32:44.748977+00:00"
     },
     {
       "id": "39dadf5f7486ceae9fae7f30",
       "title": "Гвинейские павианы быстро отреагировали на пропажу любимых фруктов после пожара",
       "url": "https://nplus1.ru/news/2026/10/30/baboons-vs-strychnos",
-      "content_hash": "af58f956eb6e838fb85c170e48420cd9c0db408ab1444f60a59921a1ddad4903",
+      "content_hash": "64674cc40f73b38f7bca8bf94b60ed49323ad4ee5c398cc3d6f3ca5893698b04",
       "source_name": "N+1 · наука",
       "published_at": "2026-10-30T16:01:00+00:00",
-      "fetched_at": "2026-11-01T18:50:35.644458+00:00"
+      "fetched_at": "2026-11-01T19:32:44.748977+00:00"
     },
     {
       "id": "401cc32697957456ed8df38e",
@@ -97,10 +97,10 @@
       "id": "5e01a7fce4ee58bc94468286",
       "title": "Без лишней скромности",
       "url": "https://nplus1.ru/material/2026/10/07/humble-optogenetics",
-      "content_hash": "ef8702026f1eeb69e14d100a337d681ae539515f8a02bf4872d53e5e2208fe5e",
+      "content_hash": "7a707113d5e65e98d5451e4ae78b4948b62a15cfb501dbc0a168d9189087c90c",
       "source_name": "N+1 · наука",
       "published_at": null,
-      "fetched_at": "2026-11-01T18:54:54.748382+00:00"
+      "fetched_at": "2026-11-01T19:32:44.764023+00:00"
     },
     {
       "id": "6c0253acc2328d752e150873",
@@ -115,28 +115,28 @@
       "id": "7793c6ca97f23cfb331aa0cb",
       "title": "Лесные пожары во время беременности связали с риском развития расстройств аутистического спектра у детей",
       "url": "https://nplus1.ru/news/2026/10/29/prenatal-exposure-to-wildfire",
-      "content_hash": "f72b900c2437c8e12be8e8dfa4aaa2d9d2fe28ddff59171a4f9870f0f67d210f",
+      "content_hash": "98abc8158ba368d8742c721cf05f6ff6319f94a732748fced2fff290d87f4eb6",
       "source_name": "N+1 · наука",
       "published_at": null,
-      "fetched_at": "2026-11-01T18:54:52.387527+00:00"
+      "fetched_at": "2026-11-01T19:32:44.772965+00:00"
     },
     {
       "id": "835be7fbb4e04432b4c68705",
       "title": "Перовскитные солнечные модули охладили для повышения эффективности",
       "url": "https://nplus1.ru/news/2026/10/30/pero-ff",
-      "content_hash": "fa6c6918230c77030d444ae219d8391a1b2775448412d87ee7b2c5ff815ab005",
+      "content_hash": "c588913892d92ce8a9098819eedfeddafff7d028c419cc48b605ee6283cb22f5",
       "source_name": "N+1 · наука",
       "published_at": "2026-10-30T16:07:00+00:00",
-      "fetched_at": "2026-11-01T18:50:34.698272+00:00"
+      "fetched_at": "2026-11-01T19:32:44.779826+00:00"
     },
     {
       "id": "83d4bd422e9278bb8da0e90f",
       "title": "За орбитой Плутона обнаружили кандидата в карликовые планеты",
       "url": "https://nplus1.ru/news/2026/10/29/new-ed138",
-      "content_hash": "22280192499e86669f0babadbf8a42e29b662d41a6b117b395a3ad9166246f9f",
+      "content_hash": "3867281b710c30c16ac1a73edd7c60082115b454c6af5f5c342354989ee6bf33",
       "source_name": "N+1 · наука",
       "published_at": null,
-      "fetched_at": "2026-11-01T18:54:52.345259+00:00"
+      "fetched_at": "2026-11-01T19:32:44.782413+00:00"
     },
     {
       "id": "86bc5a9594eb69c26450b683",
@@ -169,10 +169,10 @@
       "id": "c64596ac254fe60fd2b5774d",
       "title": "Эволюция кровососания",
       "url": "https://nplus1.ru/material/2026/10/31/how-we-evolve-in-the-shadows",
-      "content_hash": "acd253300b450ac27551f0b04aaecea16043e4b7c552999f98b2bbc431a5ea88",
+      "content_hash": "e300fbc626c6621abb4b8369cfe487ecff0595935b7039a31ffe0eae740c0662",
       "source_name": "N+1 · наука",
       "published_at": "2026-10-31T16:21:00+00:00",
-      "fetched_at": "2026-11-01T18:50:33.814005+00:00"
+      "fetched_at": "2026-11-01T19:32:44.782413+00:00"
     },
     {
       "id": "e530c99c28bcb837ff8c386a",
@@ -187,28 +187,28 @@
       "id": "e64e733d0434222aebd33934",
       "title": "Высокое содержание кальция в коронарных сосудах связали с высоким риском смерти",
       "url": "https://nplus1.ru/news/2026/10/30/calcium-subclinical-atherosclerosis",
-      "content_hash": "2566ba6fb73e57201e011d2224a960a826dbe8802c9b890f6c2efd809ea39996",
+      "content_hash": "c88d8cf37f9607395adfbd111a28161e5218c45ad93915e76396e47511fbc1f0",
       "source_name": "N+1 · наука",
       "published_at": "2026-10-30T12:52:00+00:00",
-      "fetched_at": "2026-11-01T18:50:40.657421+00:00"
+      "fetched_at": "2026-11-01T19:32:44.802989+00:00"
     },
     {
       "id": "f035808ca0edf3552fa17e20",
       "title": "Прием дулоксетина связали с небольшим облегчением боли при остеоартрите в метаанализе",
       "url": "https://nplus1.ru/news/2026/10/30/duloxetine-for-osteoarthritis",
-      "content_hash": "bf2b6071f128b7b55af48101fb206fee911304b2c13431ff0f48b58ce973591f",
+      "content_hash": "36b057079c8b4e5f32bc427133cbc08c1a28c895db0b2cc89cfff0efa4b1e05c",
       "source_name": "N+1 · наука",
       "published_at": "2026-10-30T13:54:00+00:00",
-      "fetched_at": "2026-11-01T18:50:39.083024+00:00"
+      "fetched_at": "2026-11-01T19:32:44.810206+00:00"
     },
     {
       "id": "f518533ff21bf023c16a89ee",
       "title": "Каракатицы предпочли одну живую креветку живой и четырем мертвым",
       "url": "https://nplus1.ru/news/2026/10/30/cuttlefish-dead-prey",
-      "content_hash": "5f9ea67a4bb3fe9fca5e9f82cf5bde95e79a6f7376ea04c78d3f1adf6102a8a5",
+      "content_hash": "d6f2190627fc26a5ba57c2bab0a247ddc7d9a16244cbb8072178b5b411731173",
       "source_name": "N+1 · наука",
       "published_at": "2026-10-30T13:21:00+00:00",
-      "fetched_at": "2026-11-01T18:50:39.873307+00:00"
+      "fetched_at": "2026-11-01T19:32:44.815623+00:00"
     }
   ],
   "document_count": 23,
@@ -223,12 +223,19 @@
     "dev_documents": 10,
     "test_documents": 13,
     "document_disjoint_splits": true,
-    "provenance": "agent-authored, source-anchored, not human-validated"
+    "provenance": "agent-authored, source-anchored, not human-validated",
+    "support_recheck": {
+      "questions": 60,
+      "supported_in_corrected_main_body": 60,
+      "unsupported": [],
+      "checker": "AI agent; not independent human validation"
+    }
   },
   "acquisition": [
     "N+1: 10 initial RSS publications collected through siterag.ingest.collect; media quiz excluded because generic extraction included a following article.",
     "Habr: RSS downloaded successfully without limit=100; 8 full article pages acquired and reparsed with the corrected container priority. Twelve other linked pages timed out.",
-    "N+1: 6 additional full articles discovered on the public homepage acquired individually; other discovered URLs returned HTTP 403 and were excluded without bypassing access controls."
+    "N+1: 6 additional full articles discovered on the public homepage acquired individually; other discovered URLs returned HTTP 403 and were excluded without bypassing access controls.",
+    "Revision 2: all existing 15 N+1 pages refreshed through the corrected fetch and source-specific main-body parser, HTTP200 for every page; 8 Habr documents unchanged. All question intents, IDs, qrels, and splits preserved; evidence anchors recalculated."
   ],
   "limitations": [
     "Small convenience corpus selected by network availability; not representative of all Russian websites or real production traffic.",
@@ -236,5 +243,12 @@
     "Each question has one verified positive reference document. Remaining documents are unjudged; recall and ranking metrics therefore describe reference-document retrieval, not exhaustive relevance.",
     "No judgment is a claim that a source article is factually correct. Medical, finance, and product statements are evaluated as retrieval targets only.",
     "Publication text may change or disappear. Exact reproducibility requires the local frozen data volume; this tracked manifest includes hashes and URLs, not full third-party article bodies."
-  ]
+  ],
+  "extraction_revision": 2,
+  "benchmark_status": "ready_for_remeasurement_after_parser_correction",
+  "supersedes": {
+    "corpus_hash": "262fa5c26595c2b73f203991086074ec14e210aeae16055f764bde389dc94ca4",
+    "reason": "The generic N+1 fallback included next-article previews and lost some main-body text. Revision 2 isolates the first [data-heading-wrap] [data-lmb-0] container.",
+    "results_status": "All measurements on the superseded corpus hash are obsolete; rerun all retrieval modes on the new snapshot."
+  }
 }

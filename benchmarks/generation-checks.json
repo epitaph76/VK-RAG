@@ -1,0 +1,8 @@
+{
+  "model": "gpt-5.6-luna",
+  "empty_sources_refusal": true,
+  "irrelevant_sources_refusal": true,
+  "irrelevant_sources_mode": "llm",
+  "answer": "Недостаточно данных в источниках.",
+  "latency_ms": 1500.1716999686323
+}

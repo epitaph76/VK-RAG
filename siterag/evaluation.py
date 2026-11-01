@@ -7,6 +7,33 @@ from pathlib import Path
 from .index import atomic_json
 
 
+class HTTPBenchmarkEngine:
+    """Measure the running API's real stages without loading a second copy of ML models."""
+    def __init__(self, url, settings):
+        import requests
+        from types import SimpleNamespace
+        self.url, self.settings = url.rstrip('/'), settings
+        self.session = requests.Session()
+        response = self.session.post(self.url + '/admin/login', json={'password': settings.admin_password}, timeout=20)
+        response.raise_for_status()
+        self.models = SimpleNamespace(revisions={})
+
+    def current(self):
+        from types import SimpleNamespace
+        response = self.session.get(self.url + '/admin/status', timeout=30)
+        response.raise_for_status()
+        status = response.json()
+        self.models.revisions = status['models']['revisions']
+        if not status['index']:
+            raise ValueError('Prepare the index before benchmarking')
+        return SimpleNamespace(manifest=status['index'])
+
+    def search(self, q, rerank='auto', limit=20):
+        response = self.session.get(self.url + '/search', params={'q': q, 'rerank': rerank, 'limit': limit}, timeout=180)
+        response.raise_for_status()
+        return response.json()
+
+
 def metrics(hits, qrels):
     ranked = list(dict.fromkeys(h['document_id'] for h in hits))
     positives = {doc: int(grade) for doc, grade in qrels.items() if grade > 0}
@@ -22,7 +49,8 @@ def metrics(hits, qrels):
     return out
 
 
-def evaluate(engine, questions_file, output='benchmarks/results.json'):
+def evaluate(engine, questions_file, output=None):
+    output = Path(output) if output else engine.settings.data_dir / 'reports' / 'results.json'
     questions = [json.loads(line) for line in Path(questions_file).read_text(encoding='utf-8-sig').splitlines() if line.strip()]
     if len(questions) != 60 or sum(q['split'] == 'dev' for q in questions) != 20 or sum(q['split'] == 'test' for q in questions) != 40:
         raise ValueError('Expected 20 dev + 40 test queries')
@@ -32,6 +60,9 @@ def evaluate(engine, questions_file, output='benchmarks/results.json'):
         raise ValueError('Document leakage across splits')
     snapshot = engine.current()
     corpus_hash = snapshot.manifest['corpus_hash']
+    reference_manifest = Path(questions_file).with_name('corpus-manifest.json')
+    if reference_manifest.exists() and json.loads(reference_manifest.read_text(encoding='utf-8'))['corpus_hash'] != corpus_hash:
+        raise ValueError('Корпус отличается от снимка разметки. Восстановите соответствующий том данных перед оценкой.')
     rows, cold = [], {}
     sample = questions[0].get('query') or questions[0].get('question') or questions[0].get('q')
     for mode in ('never', 'always', 'auto'):
@@ -47,6 +78,7 @@ def evaluate(engine, questions_file, output='benchmarks/results.json'):
                          **metrics(result['hits'], question['qrels']), 'latency_ms': result['meta']['timings_ms']['total'],
                          'document_ids': list(dict.fromkeys(h['document_id'] for h in result['hits'])), **result['meta']})
         print(f'Benchmark {number}/{len(questions)}', flush=True)
+        atomic_json(engine.settings.data_dir / 'evaluation-progress.json', {'corpus_hash':corpus_hash, 'completed_queries':number, 'rows':rows})
     summary = []
     for split in ('dev', 'test'):
         for mode in ('never', 'always', 'auto'):
@@ -63,6 +95,7 @@ def evaluate(engine, questions_file, output='benchmarks/results.json'):
                             'fallback_rate': sum(bool(r['warnings']) for r in selected) / len(selected),
                             'useful_rerank_queries': len(useful),
                             'missed_useful_rerank': sum(not r['rerank_applied'] for r in useful) if mode == 'auto' else None})
+    engine.current()  # Collect all model revisions after the measured run.
     report = {'generated_at': __import__('datetime').datetime.now(__import__('datetime').timezone.utc).isoformat(),
               'corpus_hash': corpus_hash, 'index_version': snapshot.manifest['version'],
               'model_revisions': engine.models.revisions, 'threshold': engine.settings.gate_threshold,
@@ -72,5 +105,6 @@ def evaluate(engine, questions_file, output='benchmarks/results.json'):
                               'Small current-source corpus; no claim of generalization.',
                               'Warm latency excludes initial loading; cold-start measurements shown separately.',
                               'Threshold fixed at 0.8 in advance; test set not used for tuning.']}
+    report['execution'] = 'running_api_server_stage_timings' if isinstance(engine, HTTPBenchmarkEngine) else 'local_engine'
     atomic_json(Path(output), report)
     return {k: v for k, v in report.items() if k != 'rows'}

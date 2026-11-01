@@ -1,18 +1,41 @@
 {
-  "url": "https://habr.com/ru/articles/1102362/",
-  "verified": true,
-  "first": {
-    "fetched": 1,
-    "changed": 1,
-    "skipped": 0,
-    "errors": []
-  },
-  "repeat": {
-    "fetched": 1,
-    "changed": 0,
-    "skipped": 0,
-    "errors": []
-  },
-  "persisted_documents": 1,
-  "reference_corpus_unchanged": true
+  "all_verified": true,
+  "checks": [
+    {
+      "url": "https://habr.com/ru/articles/1102362/",
+      "verified": true,
+      "first": {
+        "fetched": 1,
+        "changed": 1,
+        "skipped": 0,
+        "errors": []
+      },
+      "repeat": {
+        "fetched": 1,
+        "changed": 0,
+        "skipped": 0,
+        "errors": []
+      },
+      "persisted_documents": 1,
+      "reference_corpus_unchanged": true
+    },
+    {
+      "url": "https://nplus1.ru/news/2026/10/30/cooperation-in-gorillas",
+      "verified": true,
+      "first": {
+        "fetched": 1,
+        "changed": 1,
+        "skipped": 0,
+        "errors": []
+      },
+      "repeat": {
+        "fetched": 1,
+        "changed": 0,
+        "skipped": 0,
+        "errors": []
+      },
+      "persisted_documents": 2,
+      "reference_corpus_unchanged": true
+    }
+  ]
 }
