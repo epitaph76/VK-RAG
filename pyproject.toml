@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "site-rag"
+version = "1.0.0"
+description = "Site and RSS RAG with a Laya reranking gate"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "fastapi>=0.115,<1", "uvicorn>=0.34,<1", "pydantic>=2.10,<3",
+  "requests>=2.32,<3", "beautifulsoup4>=4.14,<5", "feedparser>=6.0,<7",
+  "trafilatura>=2.0,<3", "python-multipart>=0.0.20,<1", "itsdangerous>=2.2,<3",
+  "numpy>=2.0,<3", "bm25s>=0.3,<0.4", "faiss-cpu>=1.10,<2",
+  "sentence-transformers>=6.0,<7", "laya==0.4.18", "transformers>=5.0,<6",
+  "huggingface-hub>=2.0,<3", "torch>=2.8,<3", "filelock>=4.0,<5",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10", "httpx>=0.28,<1"]
+
+[project.scripts]
+site-rag = "siterag.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["siterag*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

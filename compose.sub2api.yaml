@@ -1,0 +1,11 @@
+services:
+  api:
+    environment:
+      SUB2API_BASE_URL: http://sub2api:8080/v1
+    networks:
+      - default
+      - sub2api
+networks:
+  sub2api:
+    external: true
+    name: ${SUB2API_NETWORK:-sub2api_sub2api-network}

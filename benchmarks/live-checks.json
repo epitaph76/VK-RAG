@@ -1,0 +1,18 @@
+{
+  "url": "https://habr.com/ru/articles/1102362/",
+  "verified": true,
+  "first": {
+    "fetched": 1,
+    "changed": 1,
+    "skipped": 0,
+    "errors": []
+  },
+  "repeat": {
+    "fetched": 1,
+    "changed": 0,
+    "skipped": 0,
+    "errors": []
+  },
+  "persisted_documents": 1,
+  "reference_corpus_unchanged": true
+}

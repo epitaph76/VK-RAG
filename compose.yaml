@@ -1,0 +1,49 @@
+name: site-rag
+x-backend: &backend
+  image: site-rag-backend:local
+  build: .
+  restart: unless-stopped
+  volumes:
+    - rag-data:/data
+    - rag-models:/models
+  environment: &environment
+    DATA_DIR: /data
+    HF_HOME: /models
+    MODEL_THREADS: ${MODEL_THREADS:-4}
+    MODELS_ENABLED: ${MODELS_ENABLED:-1}
+    SOURCE_DOCUMENT_LIMIT: ${SOURCE_DOCUMENT_LIMIT:-100}
+services:
+  api:
+    <<: *backend
+    environment:
+      <<: *environment
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Set ADMIN_PASSWORD in .env}
+      SESSION_SECRET: ${SESSION_SECRET:?Set SESSION_SECRET in .env}
+      SECURE_COOKIE: ${SECURE_COOKIE:-0}
+      SUB2API_API_KEY: ${SUB2API_API_KEY:-}
+      SUB2API_BASE_URL: ${SUB2API_BASE_URL:-}
+      SUB2API_MODEL: ${SUB2API_MODEL:-gpt-5.6-luna}
+      LAYA_KEEP_THRESHOLD: ${LAYA_KEEP_THRESHOLD:-0.8}
+      ASK_RATE_PER_MINUTE: ${ASK_RATE_PER_MINUTE:-5}
+      SEARCH_RATE_PER_MINUTE: ${SEARCH_RATE_PER_MINUTE:-30}
+      PIPELINE_QUEUE_SIZE: ${PIPELINE_QUEUE_SIZE:-4}
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8000/health',timeout=5)"]
+      interval: 15s
+      timeout: 7s
+      start_period: 20s
+      retries: 4
+  worker:
+    <<: *backend
+    command: [python, -m, siterag.worker]
+  web:
+    build: ./frontend
+    restart: unless-stopped
+    ports:
+      - "${BIND_ADDRESS:-127.0.0.1}:${PORT:-8090}:80"
+    depends_on:
+      api:
+        condition: service_healthy
+volumes:
+  rag-data:
+  rag-models:

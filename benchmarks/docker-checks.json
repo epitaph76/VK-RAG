@@ -1,0 +1,18 @@
+{
+  "services": [
+    "web",
+    "api",
+    "worker"
+  ],
+  "health": "ok",
+  "documents": 23,
+  "chunks": 138,
+  "worker_index_job": "done",
+  "index_changed_atomically": true,
+  "dense": true,
+  "restart_persisted": true,
+  "admin_session_survived_restart": true,
+  "search_after_restart": true,
+  "corpus_hash": "262fa5c26595c2b73f203991086074ec14e210aeae16055f764bde389dc94ca4",
+  "index_version": "33-e11bddd387de"
+}

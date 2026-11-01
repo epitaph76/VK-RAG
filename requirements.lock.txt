@@ -1,0 +1,18 @@
+# Direct dependency pins; CPU torch is installed separately in Docker.
+fastapi==0.162.0
+uvicorn==0.54.0
+pydantic==2.14.2
+requests==2.34.2
+beautifulsoup4==4.14.3
+feedparser==6.0.14
+trafilatura==2.3.1
+python-multipart==0.0.32
+itsdangerous==2.2.0
+numpy==2.5.4
+bm25s==0.3.16
+faiss-cpu==1.15.1
+sentence-transformers==6.2.0
+laya==0.4.18
+transformers==5.22.1
+huggingface-hub==2.4.0
+filelock==4.2.4

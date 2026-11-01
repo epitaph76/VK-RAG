@@ -1,0 +1,240 @@
+{
+  "generated_at": "2026-11-01T18:58:08.914259+00:00",
+  "acquisition_date": "2026-11-01",
+  "corpus_hash": "262fa5c26595c2b73f203991086074ec14e210aeae16055f764bde389dc94ca4",
+  "documents": [
+    {
+      "id": "04a26f8db204b0b68472764a",
+      "title": "Смех сородичей сделал награду привлекательнее для орангутанов",
+      "url": "https://nplus1.ru/news/2026/10/30/the-power-of-laughter",
+      "content_hash": "f1130560dab07466982e6ab6c652aa98486c30cf19afe126a4a4dca37d219e0e",
+      "source_name": "N+1 · наука",
+      "published_at": null,
+      "fetched_at": "2026-11-01T18:54:51.721043+00:00"
+    },
+    {
+      "id": "0f7f63e9eb1141cd708d8c92",
+      "title": "Горилла подставила сестре спину для доступа к высокой ветке",
+      "url": "https://nplus1.ru/news/2026/10/30/cooperation-in-gorillas",
+      "content_hash": "26e39f221b88ea58282a655b16eebc1b297a17ae698da7ba7b43337d9b9bc587",
+      "source_name": "N+1 · наука",
+      "published_at": "2026-10-30T14:45:00+00:00",
+      "fetched_at": "2026-11-01T18:50:38.210695+00:00"
+    },
+    {
+      "id": "1b864dd8ec381deb99d765d7",
+      "title": "Сколько времени займет путешествие по Вселенной с ускорением 1g?",
+      "url": "https://habr.com/ru/articles/1102358/",
+      "content_hash": "8ea5c009f35f6c43fcfa2db47a7d82044f57663f6bbfc7a4f87bc6034301ea23",
+      "source_name": "Хабр · статьи",
+      "published_at": "2026-11-01T18:24:03+00:00",
+      "fetched_at": "2026-11-01T18:55:56.830097+00:00"
+    },
+    {
+      "id": "20d556d391d774635f265557",
+      "title": "Клейкая лента защитила дверь от 99 процентов паводковой воды",
+      "url": "https://nplus1.ru/news/2026/10/30/lipkaya-lenta",
+      "content_hash": "6647d1c5a1cdda96484352be48cfac6c3a79c2a2fc316d6d012c6fc8b4dba5e3",
+      "source_name": "N+1 · наука",
+      "published_at": "2026-10-30T15:21:00+00:00",
+      "fetched_at": "2026-11-01T18:50:36.482526+00:00"
+    },
+    {
+      "id": "2364495fa3739cbfbf667025",
+      "title": "Ты не бойся, это Goose",
+      "url": "https://habr.com/ru/articles/1102376/",
+      "content_hash": "30e1ec519008087397b47bced59f1e9ae6c80cb7db5bb0f680c4034d612aa861",
+      "source_name": "Хабр · статьи",
+      "published_at": "2026-11-01T17:51:51+00:00",
+      "fetched_at": "2026-11-01T18:55:56.812610+00:00"
+    },
+    {
+      "id": "2c52eb00df00c842e0c9139e",
+      "title": "После удаления селезенки ее ткань снова разрослась у молодого американца",
+      "url": "https://nplus1.ru/news/2026/10/29/splenosis",
+      "content_hash": "1f703b229f6a721f11818b8bc5d090f84c9fbe294f059c92f234ae115c830071",
+      "source_name": "N+1 · наука",
+      "published_at": null,
+      "fetched_at": "2026-11-01T18:54:53.770618+00:00"
+    },
+    {
+      "id": "2e197496bf068ec615763d80",
+      "title": "ИИ-агенты Axiom Math формализовали доказательство самой длинной теоремы в истории математики",
+      "url": "https://nplus1.ru/news/2026/10/28/big-math-ai",
+      "content_hash": "5b3ad5f816d3de89ea7662ba869acb70a638e212941017cee3173a303b158de4",
+      "source_name": "N+1 · наука",
+      "published_at": null,
+      "fetched_at": "2026-11-01T18:54:53.902599+00:00"
+    },
+    {
+      "id": "36b825bd748ddb31ecb52b21",
+      "title": "Солнечная погода помогла самцам златок разглядеть блеск потенциальных самок",
+      "url": "https://nplus1.ru/news/2026/10/30/beetle-gloss",
+      "content_hash": "a800e70003577c2d947522ee4b9e829d8fc38f516477b5e2df3a2f0a1c4cfe05",
+      "source_name": "N+1 · наука",
+      "published_at": "2026-10-30T12:38:00+00:00",
+      "fetched_at": "2026-11-01T18:50:41.407756+00:00"
+    },
+    {
+      "id": "39dadf5f7486ceae9fae7f30",
+      "title": "Гвинейские павианы быстро отреагировали на пропажу любимых фруктов после пожара",
+      "url": "https://nplus1.ru/news/2026/10/30/baboons-vs-strychnos",
+      "content_hash": "af58f956eb6e838fb85c170e48420cd9c0db408ab1444f60a59921a1ddad4903",
+      "source_name": "N+1 · наука",
+      "published_at": "2026-10-30T16:01:00+00:00",
+      "fetched_at": "2026-11-01T18:50:35.644458+00:00"
+    },
+    {
+      "id": "401cc32697957456ed8df38e",
+      "title": "Если ИИ может сделать то же самое, зачем клиенту ваш SaaS?",
+      "url": "https://habr.com/ru/articles/1102382/",
+      "content_hash": "29094541c4de61203f6b1d345bb6cc6d3a5b7b22ea4f8b1ae75c2ee1f471c01a",
+      "source_name": "Хабр · статьи",
+      "published_at": "2026-11-01T18:34:31+00:00",
+      "fetched_at": "2026-11-01T18:55:57.284312+00:00"
+    },
+    {
+      "id": "5e01a7fce4ee58bc94468286",
+      "title": "Без лишней скромности",
+      "url": "https://nplus1.ru/material/2026/10/07/humble-optogenetics",
+      "content_hash": "ef8702026f1eeb69e14d100a337d681ae539515f8a02bf4872d53e5e2208fe5e",
+      "source_name": "N+1 · наука",
+      "published_at": null,
+      "fetched_at": "2026-11-01T18:54:54.748382+00:00"
+    },
+    {
+      "id": "6c0253acc2328d752e150873",
+      "title": "Я нанял ИИ искать мне работу. Дневник эксперимента, неделя первая",
+      "url": "https://habr.com/ru/articles/1102362/",
+      "content_hash": "c39369816f4db8db8c1cfff2cff5f9b7fab187ba72484a6b0fedef56b11e7ff6",
+      "source_name": "Хабр · статьи",
+      "published_at": "2026-11-01T16:41:12+00:00",
+      "fetched_at": "2026-11-01T18:55:57.295672+00:00"
+    },
+    {
+      "id": "7793c6ca97f23cfb331aa0cb",
+      "title": "Лесные пожары во время беременности связали с риском развития расстройств аутистического спектра у детей",
+      "url": "https://nplus1.ru/news/2026/10/29/prenatal-exposure-to-wildfire",
+      "content_hash": "f72b900c2437c8e12be8e8dfa4aaa2d9d2fe28ddff59171a4f9870f0f67d210f",
+      "source_name": "N+1 · наука",
+      "published_at": null,
+      "fetched_at": "2026-11-01T18:54:52.387527+00:00"
+    },
+    {
+      "id": "835be7fbb4e04432b4c68705",
+      "title": "Перовскитные солнечные модули охладили для повышения эффективности",
+      "url": "https://nplus1.ru/news/2026/10/30/pero-ff",
+      "content_hash": "fa6c6918230c77030d444ae219d8391a1b2775448412d87ee7b2c5ff815ab005",
+      "source_name": "N+1 · наука",
+      "published_at": "2026-10-30T16:07:00+00:00",
+      "fetched_at": "2026-11-01T18:50:34.698272+00:00"
+    },
+    {
+      "id": "83d4bd422e9278bb8da0e90f",
+      "title": "За орбитой Плутона обнаружили кандидата в карликовые планеты",
+      "url": "https://nplus1.ru/news/2026/10/29/new-ed138",
+      "content_hash": "22280192499e86669f0babadbf8a42e29b662d41a6b117b395a3ad9166246f9f",
+      "source_name": "N+1 · наука",
+      "published_at": null,
+      "fetched_at": "2026-11-01T18:54:52.345259+00:00"
+    },
+    {
+      "id": "86bc5a9594eb69c26450b683",
+      "title": "Энтропия индустрии",
+      "url": "https://habr.com/ru/articles/1097262/",
+      "content_hash": "8f137ca2ab701711d23380de87c574d3b7fb60a5afbbc41c6bcb94f3178176b8",
+      "source_name": "Хабр · статьи",
+      "published_at": "2026-11-01T18:05:08+00:00",
+      "fetched_at": "2026-11-01T18:55:57.891720+00:00"
+    },
+    {
+      "id": "8c649e44964d31502e0242f5",
+      "title": "Как попасть в ответы нейросетей: почему ответа в первом абзаце мало и как проверить начало страницы",
+      "url": "https://habr.com/ru/articles/1102378/",
+      "content_hash": "fcfd855f3cbc0f6575feb15637718dfc9c4f1aeb724f2607ebcd5daa4d477adb",
+      "source_name": "Хабр · статьи",
+      "published_at": "2026-11-01T17:56:13+00:00",
+      "fetched_at": "2026-11-01T18:55:57.896143+00:00"
+    },
+    {
+      "id": "a37f60175b5db5a1e4012969",
+      "title": "Личные AI-ассистенты и угроза приватности. Детальные профили на друзей и семью",
+      "url": "https://habr.com/ru/companies/globalsign/articles/1102364/",
+      "content_hash": "7e5b07f407e28338b6731f595b8c4aef9c933cbfb3100e613486731f0765421e",
+      "source_name": "Хабр · статьи",
+      "published_at": "2026-11-01T17:05:05+00:00",
+      "fetched_at": "2026-11-01T18:55:58.317461+00:00"
+    },
+    {
+      "id": "c64596ac254fe60fd2b5774d",
+      "title": "Эволюция кровососания",
+      "url": "https://nplus1.ru/material/2026/10/31/how-we-evolve-in-the-shadows",
+      "content_hash": "acd253300b450ac27551f0b04aaecea16043e4b7c552999f98b2bbc431a5ea88",
+      "source_name": "N+1 · наука",
+      "published_at": "2026-10-31T16:21:00+00:00",
+      "fetched_at": "2026-11-01T18:50:33.814005+00:00"
+    },
+    {
+      "id": "e530c99c28bcb837ff8c386a",
+      "title": "От промпта до продакшна за два часа: всё, что нужно знать о Claude Code",
+      "url": "https://habr.com/ru/companies/bothub/articles/1102356/",
+      "content_hash": "7d3be9dba50a4720689f7b85a93d6bc21cbb844299fe5d99e9dcce6396cb6c7d",
+      "source_name": "Хабр · статьи",
+      "published_at": "2026-11-01T15:48:49+00:00",
+      "fetched_at": "2026-11-01T18:55:58.406604+00:00"
+    },
+    {
+      "id": "e64e733d0434222aebd33934",
+      "title": "Высокое содержание кальция в коронарных сосудах связали с высоким риском смерти",
+      "url": "https://nplus1.ru/news/2026/10/30/calcium-subclinical-atherosclerosis",
+      "content_hash": "2566ba6fb73e57201e011d2224a960a826dbe8802c9b890f6c2efd809ea39996",
+      "source_name": "N+1 · наука",
+      "published_at": "2026-10-30T12:52:00+00:00",
+      "fetched_at": "2026-11-01T18:50:40.657421+00:00"
+    },
+    {
+      "id": "f035808ca0edf3552fa17e20",
+      "title": "Прием дулоксетина связали с небольшим облегчением боли при остеоартрите в метаанализе",
+      "url": "https://nplus1.ru/news/2026/10/30/duloxetine-for-osteoarthritis",
+      "content_hash": "bf2b6071f128b7b55af48101fb206fee911304b2c13431ff0f48b58ce973591f",
+      "source_name": "N+1 · наука",
+      "published_at": "2026-10-30T13:54:00+00:00",
+      "fetched_at": "2026-11-01T18:50:39.083024+00:00"
+    },
+    {
+      "id": "f518533ff21bf023c16a89ee",
+      "title": "Каракатицы предпочли одну живую креветку живой и четырем мертвым",
+      "url": "https://nplus1.ru/news/2026/10/30/cuttlefish-dead-prey",
+      "content_hash": "5f9ea67a4bb3fe9fca5e9f82cf5bde95e79a6f7376ea04c78d3f1adf6102a8a5",
+      "source_name": "N+1 · наука",
+      "published_at": "2026-10-30T13:21:00+00:00",
+      "fetched_at": "2026-11-01T18:50:39.873307+00:00"
+    }
+  ],
+  "document_count": 23,
+  "source_counts": {
+    "N+1 · наука": 15,
+    "Хабр · статьи": 8
+  },
+  "benchmark": {
+    "questions": 60,
+    "dev": 20,
+    "test": 40,
+    "dev_documents": 10,
+    "test_documents": 13,
+    "document_disjoint_splits": true,
+    "provenance": "agent-authored, source-anchored, not human-validated"
+  },
+  "acquisition": [
+    "N+1: 10 initial RSS publications collected through siterag.ingest.collect; media quiz excluded because generic extraction included a following article.",
+    "Habr: RSS downloaded successfully without limit=100; 8 full article pages acquired and reparsed with the corrected container priority. Twelve other linked pages timed out.",
+    "N+1: 6 additional full articles discovered on the public homepage acquired individually; other discovered URLs returned HTTP 403 and were excluded without bypassing access controls."
+  ],
+  "limitations": [
+    "Small convenience corpus selected by network availability; not representative of all Russian websites or real production traffic.",
+    "Questions and positive qrels are authored by an AI agent after reading the stored source texts, not independently validated by a human.",
+    "Each question has one verified positive reference document. Remaining documents are unjudged; recall and ranking metrics therefore describe reference-document retrieval, not exhaustive relevance.",
+    "No judgment is a claim that a source article is factually correct. Medical, finance, and product statements are evaluated as retrieval targets only.",
+    "Publication text may change or disappear. Exact reproducibility requires the local frozen data volume; this tracked manifest includes hashes and URLs, not full third-party article bodies."
+  ]
+}
