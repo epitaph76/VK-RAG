@@ -1,0 +1,648 @@
+{
+  "checked_at": "2026-11-01T21:25:50.804245+00:00",
+  "environment": "Docker Compose, real E5/FAISS, Laya, cross-encoder, sub2api gpt-5.6-luna",
+  "checks": [
+    {
+      "q": "какие последние новости в ml",
+      "use_llm": true,
+      "http_status": 200,
+      "seconds": 20.19,
+      "answer_mode": "llm",
+      "answer_excerpt": "Среди свежих материалов по ML — развитие персональных AI-агентов с доступом к почте, мессенджерам, файлам и другим данным. Это усиливает риски приватности и безопасности: исследователи обнаружили у одного агента широкие системные полномочия, включая доступ к пользовательским файлам и SSH-ключам. [1]",
+      "sources": [
+        {
+          "id": "a37f60175b5db5a1e4012969:0",
+          "title": "Личные AI-ассистенты и угроза приватности. Детальные профили на друзей и семью",
+          "url": "https://habr.com/ru/companies/globalsign/articles/1102364/",
+          "score": -0.9314278960227966
+        },
+        {
+          "id": "c34aae67ee1547d96b9ecef7:1280",
+          "title": "Ваш AI‑стартап похож на все остальные",
+          "url": "https://habr.com/ru/articles/1102402/",
+          "score": -3.653972864151001
+        },
+        {
+          "id": "fc509f6a4f015a0052f788b3:640",
+          "title": "Айтишка перестала быть чит-кодом в хорошую жизнь",
+          "url": "https://habr.com/ru/articles/1102140/",
+          "score": -3.7145349979400635
+        },
+        {
+          "id": "71559fb29b013f57932936bd:6400",
+          "title": "От учителя к студенту: путь к изотропным эмбеддингам в 29M модели. Часть 4/10",
+          "url": "https://habr.com/ru/articles/1100882/",
+          "score": -4.729754447937012
+        }
+      ],
+      "meta": {
+        "mode": "auto",
+        "gate": {
+          "decision": "keep",
+          "confidence": 0.719,
+          "run_rerank": true,
+          "reason": "rerank_or_uncertain"
+        },
+        "rerank_applied": true,
+        "timings_ms": {
+          "bm25": 3.544107001289376,
+          "dense": 6231.2057740000455,
+          "fusion": 0.3471240015642252,
+          "gate": 4999.974860000293,
+          "reranker": 4829.839423999147,
+          "total": 16253.461887999947,
+          "context_filter": 42.62167299930297,
+          "generation": 3857.0380819983257,
+          "request_total": 20153.121642997576
+        },
+        "warnings": [],
+        "index_version": "100-f749d38fb33b",
+        "corpus_hash": "54b75e7b8585bc428da0be949b31761ff7948f7dcf0293823a3c40c04f58497f",
+        "effective_query": "машинное обучение",
+        "query_intent": {
+          "topic": "машинное обучение",
+          "recent": true
+        },
+        "candidate_count": 20,
+        "context_filter": {
+          "policy_version": "semantic-v1",
+          "methods": [
+            "llm_semantic"
+          ],
+          "input_count": 10,
+          "selected_count": 4,
+          "local_fallback": {
+            "policy_version": "context-v2",
+            "query_intent": {
+              "topic": "машинное обучение",
+              "recent": true
+            },
+            "methods": [
+              "explicit_topic_support"
+            ],
+            "input_count": 20,
+            "accepted_count": 1,
+            "selected_count": 1,
+            "rejected": [
+              {
+                "id": "c34aae67ee1547d96b9ecef7:1280",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "3b6e670d7152e96eab048703:1600",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "fc509f6a4f015a0052f788b3:640",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "aa3649c95c88371a8a85a05c:2560",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "01dd02a02b0d657724556727:1600",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "01dd02a02b0d657724556727:960",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "5cc7e07c8692526dc7effd82:1280",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "71559fb29b013f57932936bd:6400",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "f3ec987e6925621a7d7c8602:4800",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "01dd02a02b0d657724556727:1280",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "e530c99c28bcb837ff8c386a:6400",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "5cc7e07c8692526dc7effd82:960",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "71559fb29b013f57932936bd:0",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "fc509f6a4f015a0052f788b3:2240",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "5cc7e07c8692526dc7effd82:640",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "830d35d8a7607955a640f56e:960",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "71559fb29b013f57932936bd:6080",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "6ae5d41416e4e974d04bf98b:1280",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "aa3649c95c88371a8a85a05c:640",
+                "reason": "requested_topic_not_supported"
+              }
+            ],
+            "rescued_by_explicit_topic": [
+              "a37f60175b5db5a1e4012969:0"
+            ],
+            "thresholds": {
+              "reranker_logit": 0.0,
+              "dense_cosine": 0.78,
+              "term_coverage": 0.6
+            }
+          }
+        }
+      }
+    },
+    {
+      "q": "какие последние новости в decision моделях",
+      "use_llm": true,
+      "http_status": 200,
+      "seconds": 10.44,
+      "answer_mode": "llm",
+      "answer_excerpt": "В материалах от 1 ноября 2026 года сообщается, что LLM демонстрируют устойчивые различия в склонности к риску: в одном сравнении порядок был от более осторожной Claude Sonnet 4.5 до более рискованной GPT-5.2, при этом Grok 4 и Qwen3 Max сильнее меняли оценки в зависимости от задачи. На поведение вли",
+      "sources": [
+        {
+          "id": "1101aa453d93e8451de5b2aa:960",
+          "title": "LLM-беседы: Предрасположенность к риску разных ноосвиков / LLM",
+          "url": "https://habr.com/ru/articles/1102280/",
+          "score": -3.6577422618865967
+        },
+        {
+          "id": "1101aa453d93e8451de5b2aa:320",
+          "title": "LLM-беседы: Предрасположенность к риску разных ноосвиков / LLM",
+          "url": "https://habr.com/ru/articles/1102280/",
+          "score": -4.153905868530273
+        },
+        {
+          "id": "811fba722c469d3adec4c13d:6080",
+          "title": "Агентский поиск на open-source моделях: 7 поисковых инструментов, 16 моделей и одна компания",
+          "url": "https://habr.com/ru/articles/1102340/",
+          "score": -4.381499767303467
+        }
+      ],
+      "meta": {
+        "mode": "auto",
+        "gate": {
+          "decision": "keep",
+          "confidence": 0.5862,
+          "run_rerank": true,
+          "reason": "rerank_or_uncertain"
+        },
+        "rerank_applied": true,
+        "timings_ms": {
+          "bm25": 0.7380829993053339,
+          "dense": 16.30486199974257,
+          "fusion": 0.44591100049728993,
+          "gate": 3049.239046000366,
+          "reranker": 2920.9126440000546,
+          "total": 5989.008521999494,
+          "context_filter": 31.099066000024322,
+          "generation": 4398.0222460013465,
+          "request_total": 10418.129834000865
+        },
+        "warnings": [],
+        "index_version": "100-f749d38fb33b",
+        "corpus_hash": "54b75e7b8585bc428da0be949b31761ff7948f7dcf0293823a3c40c04f58497f",
+        "effective_query": "модели принятия решений",
+        "query_intent": {
+          "topic": "модели принятия решений",
+          "recent": true
+        },
+        "candidate_count": 20,
+        "context_filter": {
+          "policy_version": "semantic-v1",
+          "methods": [
+            "llm_semantic"
+          ],
+          "input_count": 10,
+          "selected_count": 3,
+          "local_fallback": {
+            "policy_version": "context-v2",
+            "query_intent": {
+              "topic": "модели принятия решений",
+              "recent": true
+            },
+            "methods": [
+              "reranker_and_topic_support"
+            ],
+            "input_count": 20,
+            "accepted_count": 0,
+            "selected_count": 0,
+            "rejected": [
+              {
+                "id": "cf2dc23856322590e039bc72:1920",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "830d35d8a7607955a640f56e:2880",
+                "reason": "insufficient_topic_support"
+              },
+              {
+                "id": "37278a516e009077e6f41588:1600",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "37278a516e009077e6f41588:640",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "1101aa453d93e8451de5b2aa:960",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "811fba722c469d3adec4c13d:960",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "71559fb29b013f57932936bd:0",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "1101aa453d93e8451de5b2aa:320",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "811fba722c469d3adec4c13d:6080",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "830d35d8a7607955a640f56e:0",
+                "reason": "insufficient_topic_support"
+              },
+              {
+                "id": "25520297eef398b05725cd33:5760",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "aa3649c95c88371a8a85a05c:320",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "25520297eef398b05725cd33:6080",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "830d35d8a7607955a640f56e:960",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "2e33af47bd080a670fad11f6:0",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "1101aa453d93e8451de5b2aa:640",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "e919a9bae33f2ee396f0ecd7:320",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "aa3649c95c88371a8a85a05c:2560",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "c34aae67ee1547d96b9ecef7:960",
+                "reason": "requested_topic_not_supported"
+              },
+              {
+                "id": "811fba722c469d3adec4c13d:640",
+                "reason": "requested_topic_not_supported"
+              }
+            ],
+            "rescued_by_explicit_topic": [],
+            "thresholds": {
+              "reranker_logit": 0.0,
+              "dense_cosine": 0.78,
+              "term_coverage": 0.6
+            }
+          }
+        }
+      }
+    },
+    {
+      "q": "Как оформить визу в Японию?",
+      "use_llm": true,
+      "http_status": 200,
+      "seconds": 9.95,
+      "answer_mode": "llm",
+      "answer_excerpt": "Недостаточно данных в источниках.",
+      "sources": [],
+      "meta": {
+        "mode": "auto",
+        "gate": {
+          "decision": "rerank",
+          "confidence": 0.8312,
+          "run_rerank": true,
+          "reason": "rerank_or_uncertain"
+        },
+        "rerank_applied": true,
+        "timings_ms": {
+          "bm25": 0.5492309992405353,
+          "dense": 18.749910001133685,
+          "fusion": 0.41441500070504844,
+          "gate": 3439.2196259996126,
+          "reranker": 3468.0249909997656,
+          "total": 6928.2165830009035,
+          "context_filter": 37.80639400065411,
+          "generation": 2983.2373459994415,
+          "request_total": 9949.260323000999
+        },
+        "warnings": [],
+        "index_version": "100-f749d38fb33b",
+        "corpus_hash": "54b75e7b8585bc428da0be949b31761ff7948f7dcf0293823a3c40c04f58497f",
+        "effective_query": "Как оформить визу в Японию?",
+        "query_intent": {
+          "topic": "Как оформить визу в Японию?",
+          "recent": false
+        },
+        "candidate_count": 20,
+        "context_filter": {
+          "policy_version": "semantic-v1",
+          "methods": [
+            "llm_semantic"
+          ],
+          "input_count": 10,
+          "selected_count": 0,
+          "local_fallback": {
+            "policy_version": "context-v2",
+            "query_intent": {
+              "topic": "Как оформить визу в Японию?",
+              "recent": false
+            },
+            "methods": [
+              "reranker_and_topic_support"
+            ],
+            "input_count": 20,
+            "accepted_count": 0,
+            "selected_count": 0,
+            "rejected": [
+              {
+                "id": "37278a516e009077e6f41588:3520",
+                "reason": "insufficient_topic_support"
+              },
+              {
+                "id": "cf2dc23856322590e039bc72:3200",
+                "reason": "insufficient_topic_support"
+              },
+              {
+                "id": "e919a9bae33f2ee396f0ecd7:2240",
+                "reason": "insufficient_topic_support"
+              },
+              {
+                "id": "e919a9bae33f2ee396f0ecd7:2560",
+                "reason": "insufficient_topic_support"
+              },
+              {
+                "id": "6ae5d41416e4e974d04bf98b:1280",
+                "reason": "insufficient_topic_support"
+              },
+              {
+                "id": "37278a516e009077e6f41588:3840",
+                "reason": "insufficient_topic_support"
+              },
+              {
+                "id": "6ae5d41416e4e974d04bf98b:0",
+                "reason": "insufficient_topic_support"
+              },
+              {
+                "id": "6ae5d41416e4e974d04bf98b:960",
+                "reason": "insufficient_topic_support"
+              },
+              {
+                "id": "65aed51838104341775dc93b:1600",
+                "reason": "insufficient_topic_support"
+              },
+              {
+                "id": "a4fc23c3b2f73b1c838ee41a:0",
+                "reason": "insufficient_topic_support"
+              },
+              {
+                "id": "6c0253acc2328d752e150873:320",
+                "reason": "insufficient_topic_support"
+              },
+              {
+                "id": "aa3649c95c88371a8a85a05c:2880",
+                "reason": "insufficient_topic_support"
+              },
+              {
+                "id": "8c649e44964d31502e0242f5:960",
+                "reason": "insufficient_topic_support"
+              },
+              {
+                "id": "aa3649c95c88371a8a85a05c:0",
+                "reason": "insufficient_topic_support"
+              },
+              {
+                "id": "65aed51838104341775dc93b:0",
+                "reason": "insufficient_topic_support"
+              },
+              {
+                "id": "aa3649c95c88371a8a85a05c:3840",
+                "reason": "insufficient_topic_support"
+              },
+              {
+                "id": "01dd02a02b0d657724556727:2880",
+                "reason": "insufficient_topic_support"
+              },
+              {
+                "id": "01dd02a02b0d657724556727:1920",
+                "reason": "insufficient_topic_support"
+              },
+              {
+                "id": "dd75e9b40ef502cc43e9ba9b:2880",
+                "reason": "insufficient_topic_support"
+              },
+              {
+                "id": "954e56354f92ec4cb8b9d013:3520",
+                "reason": "insufficient_topic_support"
+              }
+            ],
+            "rescued_by_explicit_topic": [],
+            "thresholds": {
+              "reranker_logit": 0.0,
+              "dense_cosine": 0.78,
+              "term_coverage": 0.6
+            }
+          }
+        }
+      }
+    },
+    {
+      "q": "какие последние новости в ml",
+      "use_llm": false,
+      "http_status": 200,
+      "seconds": 6.8,
+      "answer_mode": "extractive",
+      "answer_excerpt": "Выдержки из найденных материалов:\n\nНовейший тренд в технологиях машинного обучения — так называемые «персональные ассистенты», AI-агенты вроде Muse от Meta* и Dots от OpenAI. [1]",
+      "sources": [
+        {
+          "id": "a37f60175b5db5a1e4012969:0",
+          "title": "Личные AI-ассистенты и угроза приватности. Детальные профили на друзей и семью",
+          "url": "https://habr.com/ru/companies/globalsign/articles/1102364/",
+          "score": -0.9314278960227966
+        }
+      ],
+      "meta": {
+        "mode": "auto",
+        "gate": {
+          "decision": "keep",
+          "confidence": 0.719,
+          "run_rerank": true,
+          "reason": "rerank_or_uncertain"
+        },
+        "rerank_applied": true,
+        "timings_ms": {
+          "bm25": 0.3596210008254275,
+          "dense": 16.783757999291993,
+          "fusion": 1.4312139992398443,
+          "gate": 3193.3445220001886,
+          "reranker": 3552.8824949997215,
+          "total": 6765.957326999342,
+          "context_filter": 8.696838000105345,
+          "generation": 0.624910000624368,
+          "request_total": 6775.279075000071
+        },
+        "warnings": [],
+        "index_version": "100-f749d38fb33b",
+        "corpus_hash": "54b75e7b8585bc428da0be949b31761ff7948f7dcf0293823a3c40c04f58497f",
+        "effective_query": "машинное обучение",
+        "query_intent": {
+          "topic": "машинное обучение",
+          "recent": true
+        },
+        "candidate_count": 20,
+        "context_filter": {
+          "policy_version": "context-v2",
+          "query_intent": {
+            "topic": "машинное обучение",
+            "recent": true
+          },
+          "methods": [
+            "explicit_topic_support"
+          ],
+          "input_count": 20,
+          "accepted_count": 1,
+          "selected_count": 1,
+          "rejected": [
+            {
+              "id": "c34aae67ee1547d96b9ecef7:1280",
+              "reason": "requested_topic_not_supported"
+            },
+            {
+              "id": "3b6e670d7152e96eab048703:1600",
+              "reason": "requested_topic_not_supported"
+            },
+            {
+              "id": "fc509f6a4f015a0052f788b3:640",
+              "reason": "requested_topic_not_supported"
+            },
+            {
+              "id": "aa3649c95c88371a8a85a05c:2560",
+              "reason": "requested_topic_not_supported"
+            },
+            {
+              "id": "01dd02a02b0d657724556727:1600",
+              "reason": "requested_topic_not_supported"
+            },
+            {
+              "id": "01dd02a02b0d657724556727:960",
+              "reason": "requested_topic_not_supported"
+            },
+            {
+              "id": "5cc7e07c8692526dc7effd82:1280",
+              "reason": "requested_topic_not_supported"
+            },
+            {
+              "id": "71559fb29b013f57932936bd:6400",
+              "reason": "requested_topic_not_supported"
+            },
+            {
+              "id": "f3ec987e6925621a7d7c8602:4800",
+              "reason": "requested_topic_not_supported"
+            },
+            {
+              "id": "01dd02a02b0d657724556727:1280",
+              "reason": "requested_topic_not_supported"
+            },
+            {
+              "id": "e530c99c28bcb837ff8c386a:6400",
+              "reason": "requested_topic_not_supported"
+            },
+            {
+              "id": "5cc7e07c8692526dc7effd82:960",
+              "reason": "requested_topic_not_supported"
+            },
+            {
+              "id": "71559fb29b013f57932936bd:0",
+              "reason": "requested_topic_not_supported"
+            },
+            {
+              "id": "fc509f6a4f015a0052f788b3:2240",
+              "reason": "requested_topic_not_supported"
+            },
+            {
+              "id": "5cc7e07c8692526dc7effd82:640",
+              "reason": "requested_topic_not_supported"
+            },
+            {
+              "id": "830d35d8a7607955a640f56e:960",
+              "reason": "requested_topic_not_supported"
+            },
+            {
+              "id": "71559fb29b013f57932936bd:6080",
+              "reason": "requested_topic_not_supported"
+            },
+            {
+              "id": "6ae5d41416e4e974d04bf98b:1280",
+              "reason": "requested_topic_not_supported"
+            },
+            {
+              "id": "aa3649c95c88371a8a85a05c:640",
+              "reason": "requested_topic_not_supported"
+            }
+          ],
+          "rescued_by_explicit_topic": [
+            "a37f60175b5db5a1e4012969:0"
+          ],
+          "thresholds": {
+            "reranker_logit": 0.0,
+            "dense_cosine": 0.78,
+            "term_coverage": 0.6
+          }
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "LLM semantic relevance and citation validity do not prove every claim is correct.",
+    "This regression set is not an independent quality benchmark."
+  ],
+  "browser_check": {
+    "q": "какие последние новости в ml",
+    "answer_mode": "llm",
+    "source_count": 4,
+    "citations_and_cards_visible": true,
+    "screenshot": "docs/semantic-recovery.png"
+  }
+}

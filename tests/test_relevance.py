@@ -1,11 +1,12 @@
 from dataclasses import replace
 from types import SimpleNamespace
+import json
 
 import pytest
 
 from siterag.config import Settings
-from siterag.generation import REFUSAL, answer
-from siterag.relevance import expand_query, select_context
+from siterag.generation import REFUSAL, answer, extractive
+from siterag.relevance import query_plan, select_context
 
 
 def hit(ident, text, score=None, dense=None):
@@ -21,19 +22,19 @@ def test_context_drops_negative_candidates_without_filling_top_five():
     candidates = [hit('ml', 'Новая модель машинного обучения.', 2),
                   hit('animals', 'Социальное обучение животных.', -3),
                   hit('medicine', 'Оптогенетика и нейроны.', -2),
-                  hit('paper', 'Результаты разработки модели.', .2)]
+                  hit('paper', 'Результаты разработки большой языковой модели.', .2)]
     chosen, meta = select_context('какие последние новости в ml', result(candidates), Settings())
     assert [h['id'] for h in chosen] == ['ml', 'paper']
     assert meta['selected_count'] == 2 and len(meta['rejected']) == 2
 
 
-def test_no_relevant_evidence_abstains_without_calling_llm(monkeypatch):
+def test_no_relevant_evidence_abstains_when_llm_is_disabled(monkeypatch):
     def unexpected(*args, **kwargs):
         raise AssertionError('An unsupported question must not be sent to the LLM')
     monkeypatch.setattr('siterag.generation.requests.post', unexpected)
     original = result([hit('animals', 'Социальное обучение животных.', -3)])
     cfg = Settings(api_url='https://example.org/v1', api_key='test-key')
-    response = answer('какие последние новости в ml', original, cfg)
+    response = answer('какие последние новости в ml', original, cfg, use_llm=False)
     assert response['answer'] == REFUSAL and response['sources'] == []
     assert response['meta']['context_filter']['selected_count'] == 0
     assert original['meta']['warnings'] == []
@@ -45,12 +46,12 @@ def test_never_mode_and_reranker_outage_require_topic_support():
                   hit('medicine', 'Ученые исследовали нейроны и свет.', dense=.92)]
     chosen, meta = select_context('какие последние новости в ml', result(candidates), Settings())
     assert [h['id'] for h in chosen] == ['ml']
-    assert meta['methods'] == ['lexical_dense_fallback']
+    assert meta['methods'] == ['explicit_topic_support']
 
 
 @pytest.mark.parametrize('dense,expected', [(None, True), (.9, True), (.7, False), (float('nan'), False)])
 def test_fallback_keeps_bm25_without_dense_but_rejects_weak_dense(dense, expected):
-    chosen, _ = select_context('квантовые вычисления', result([
+    chosen, _ = select_context('квантовые вычисления алгоритмы', result([
         hit('a', 'Квантовым вычислениям посвящено новое исследование.', dense=dense)]), Settings())
     assert bool(chosen) is expected
 
@@ -62,15 +63,16 @@ def test_threshold_is_a_configurable_logit_not_rrf_or_probability():
 
 
 def test_aliases_respect_word_boundaries():
-    expanded = expand_query('какие последние новости в ML')
+    expanded = query_plan('какие последние новости в ML')['topic']
     assert 'машинное обучение' in expanded
-    assert expand_query('HTML и семейство') == 'HTML и семейство'
+    assert query_plan('HTML и семейство')['topic'] == 'HTML и семейство'
 
 
 def test_only_cited_sources_are_returned_and_references_are_renumbered(monkeypatch):
     monkeypatch.setattr('siterag.generation.requests.post', lambda *args, **kwargs:
         SimpleNamespace(raise_for_status=lambda: None, json=lambda: {
-            'choices': [{'message': {'content': 'Результат эксперимента [2].'}}]}))
+            'choices': [{'message': {'content': json.dumps({'status': 'answered', 'relevant_sources': [2],
+                'answer': 'Результат эксперимента [2].'})}}]}))
     cfg = Settings(api_url='https://example.org/v1', api_key='test-key')
     response = answer('question', result([hit('a', 'Text A', 1), hit('b', 'Text B', 1)]), cfg)
     assert response['answer_mode'] == 'llm'
@@ -85,3 +87,69 @@ def test_llm_refusal_does_not_leave_source_cards(monkeypatch):
     response = answer('question', result([hit('a', 'Potential evidence.', 1)]),
                       Settings(api_url='https://example.org/v1', api_key='test-key'))
     assert response['answer'] == REFUSAL and response['sources'] == []
+
+
+def test_negative_logit_cannot_veto_explicit_news_topic():
+    candidates = [hit('ml', 'Новый тренд машинного обучения — персональные AI-ассистенты.', -2),
+                  hit('animals', 'Социальное обучение животных.', -1)]
+    chosen, meta = select_context('какие последние новости в ml', result(candidates), Settings())
+    assert [h['id'] for h in chosen] == ['ml']
+    assert meta['rescued_by_explicit_topic'] == ['ml']
+
+
+def test_decision_models_require_decisions_and_models_not_just_learning():
+    candidates = [hit('risk', 'Исследователи сравнили модели принятия решений и их склонность к риску.', -3.5),
+                  hit('animals', 'Модели социального обучения животных.', -1),
+                  hit('fatigue', 'Принятие решений вызывает усталость человека.', -1)]
+    chosen, _ = select_context('какие последние новости в decision моделях', result(candidates), Settings())
+    assert [h['id'] for h in chosen] == ['risk']
+
+
+def test_news_wrapper_does_not_become_the_retrieval_topic():
+    assert query_plan('какие последние новости в ml') == {'topic': 'машинное обучение', 'recent': True}
+    assert query_plan('какие последние новости в decision моделях')['topic'] == 'модели принятия решений'
+    assert query_plan('Почему древнейшего осьминога признали наутилусом?')['recent'] is False
+
+
+def test_news_context_preserves_dates_and_document_diversity():
+    candidates = [hit('old', 'Новые методы машинного обучения.', 1) | {'published_at': '2025-01-01'},
+                  hit('new', 'Современные методы машинного обучения.', -2) | {'published_at': '2026-11-01'}]
+    chosen, _ = select_context('какие последние новости в ml', result(candidates), Settings())
+    assert [h['id'] for h in chosen] == ['new', 'old']
+
+
+def test_semantic_selection_can_accept_paraphrase_despite_negative_logit(monkeypatch):
+    monkeypatch.setattr('siterag.generation.requests.post', lambda *args, **kwargs:
+        SimpleNamespace(raise_for_status=lambda: None, json=lambda: {
+            'choices': [{'message': {'content': json.dumps({'status': 'answered', 'relevant_sources': [1],
+                'answer': 'Исследование сравнивает рискованность выбора разных систем [1].'})}}]}))
+    cfg = Settings(api_url='https://example.org/v1', api_key='test-key')
+    response = answer('Как модели принимают решения?', result([
+        hit('paper', 'Исследователи сравнили предпочтения риска у языковых систем.', -3)]), cfg)
+    assert response['answer_mode'] == 'llm' and len(response['sources']) == 1
+    assert response['meta']['context_filter']['methods'] == ['llm_semantic']
+
+
+def test_empty_search_never_calls_llm(monkeypatch):
+    def unexpected(*args, **kwargs):
+        raise AssertionError('No candidates')
+    monkeypatch.setattr('siterag.generation.requests.post', unexpected)
+    response = answer('question', result([]), Settings(api_url='https://example.org/v1', api_key='test-key'))
+    assert response['answer'] == REFUSAL and not response['sources']
+
+
+def test_semantic_selection_rejects_citations_outside_its_selection(monkeypatch):
+    monkeypatch.setattr('siterag.generation.requests.post', lambda *args, **kwargs:
+        SimpleNamespace(raise_for_status=lambda: None, json=lambda: {
+            'choices': [{'message': {'content': json.dumps({'status': 'answered', 'relevant_sources': [1],
+                'answer': 'Unsupported answer [2].'})}}]}))
+    response = answer('question', result([hit('a', 'Unrelated A.', -3), hit('b', 'Unrelated B.', -3)]),
+                      Settings(api_url='https://example.org/v1', api_key='test-key'))
+    assert response['answer_mode'] == 'extractive' and not response['sources']
+
+
+def test_extractive_news_uses_topic_evidence_instead_of_common_question_words():
+    text = ('Температура в помещении и шум в офисе влияют на состояние мозга. '
+            'Новый тренд машинного обучения — персональные ассистенты на основе LLM.')
+    response = extractive('какие последние новости в ml', [hit('paper', text)])
+    assert 'ассистенты' in response and 'Температура' not in response

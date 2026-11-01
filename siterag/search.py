@@ -6,7 +6,7 @@ import threading
 import numpy as np
 
 from .index import Snapshot
-from .relevance import expand_query
+from .relevance import query_plan
 
 
 def rrf(rankings):
@@ -80,8 +80,10 @@ class SearchEngine:
                 'rerank_applied': False, 'timings_ms': timings, 'warnings': warnings,
                 'index_version': snapshot.manifest['version'] if snapshot else None,
                 'corpus_hash': snapshot.manifest['corpus_hash'] if snapshot else None}
-        q = expand_query(q)
+        plan = query_plan(q)
+        q = plan['topic']
         meta['effective_query'] = q
+        meta['query_intent'] = plan
         if not snapshot:
             warnings.append('База ещё не подготовлена. Администратор может запустить сбор.')
             timings['total'] = (time.perf_counter() - started) * 1000
@@ -125,13 +127,16 @@ class SearchEngine:
         for chunk in snapshot.chunks:
             if chunk['source_id'] in active:
                 grouped.setdefault(chunk['content_hash'], {})[chunk['url']] = {'title': chunk['title'], 'url': chunk['url'], 'source_id': chunk['source_id']}
-        hits, seen = [], set()
+        hits, seen, per_document = [], set(), {}
         for i in order:
             chunk = snapshot.chunks[i]
             key = (chunk['content_hash'], chunk['id'].rsplit(':', 1)[-1])
             if key in seen:
                 continue
+            if plan['recent'] and per_document.get(chunk['document_id'], 0) >= 3:
+                continue
             seen.add(key)
+            per_document[chunk['document_id']] = per_document.get(chunk['document_id'], 0) + 1
             hits.append(chunk | {'retrieval_score': scores[i], 'rerank_score': None, 'score': scores[i], 'score_type': 'rrf',
                                  'bm25_score': float(sparse_scores[i]),
                                  'dense_score': dense_scores.get(i) if dense_scores is not None else None,
@@ -155,7 +160,7 @@ class SearchEngine:
                 before = time.perf_counter()
                 try:
                     reranker = self.models.get('reranker')
-                    values = np.asarray(reranker.predict([(q, h['text']) for h in hits], batch_size=4, show_progress_bar=False)).reshape(-1)
+                    values = np.asarray(reranker.predict([(q, h['title'] + '\n' + h['text']) for h in hits], batch_size=4, show_progress_bar=False)).reshape(-1)
                     if len(values) != len(hits) or not np.isfinite(values).all():
                         raise ValueError('Invalid reranker output')
                     hits = [h | {'rerank_score': float(v), 'score': float(v), 'score_type': 'cross_encoder'} for h, v in zip(hits, values)]
