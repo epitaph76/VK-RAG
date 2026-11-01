@@ -9,7 +9,7 @@ type Hit = { id: string; title: string; url: string; text: string; published_at:
 type Meta = { warnings: string[]; rerank_applied: boolean; gate: { decision: string; reason: string; confidence: number | null }; timings_ms: Record<string, number>; index_version: string | null };
 type Result = { answer: string; sources: Hit[]; answer_mode: string; meta: Meta; model?: string };
 type Turn = { id: string; question: string; result: Result };
-type Job = { id: string; kind: string; state: string; progress: number; total: number; created_at: string; error?: string; result: { errors?: { source: string; error: string }[]; sources?: { source: string; fetched: number; changed: number; skipped: number }[]; index?: { version: string; warnings: string[] } } };
+type Job = { id: string; kind: string; state: string; progress: number; total: number; created_at: string; error?: string; result: { phase?: string; current_source?: string; current?: { retries?: number; retry_events?: { attempt: number; max_attempts: number; reason: string; delay_seconds: number }[] }; index_reused?: boolean; errors?: { source: string; error: string }[]; sources?: { source: string; fetched: number; changed: number; skipped: number; retries?: number }[]; index?: { version: string; warnings: string[] } } };
 type Status = { documents: number; revision: number; index: { chunks: number; dense: boolean; version: string; revision: number; warnings: string[] } | null; llm: { configured: boolean; model: string }; models: { loaded: string[]; errors: Record<string, string> }; limits: { ask_per_minute: number } };
 type Compared = Record<string, { hits: Hit[]; meta: Meta }>;
 
@@ -28,16 +28,19 @@ function JobCard({ job }: { job: Job }) {
   // Older jobs used `done` even when only some sources were updated.
   const state = job.state === 'done' && job.error ? 'partial' : job.state;
   const labels: Record<string, string> = { queued: 'В очереди', running: 'Выполняется', done: 'Готово', partial: 'Частично', failed: 'Ошибка' };
+  const lastRetry = job.result.current?.retry_events?.at(-1);
   return <div className="job">
     <span className={'job-state ' + state}>{labels[state] || state}</span>
-    <strong>{job.kind === 'index' ? 'Построение индекса' : 'Сбор материалов'}</strong>
-    <span className="muted">{job.progress}/{job.total}</span>
+    <strong>{job.kind === 'index' || job.result.phase === 'index' ? 'Построение индекса' : 'Сбор материалов'}</strong>
+    <span className="muted">{job.progress}/{job.total}{job.result.phase === 'collect' ? ' страниц' : job.result.index || job.result.phase === 'index' ? ' фрагментов в индексе' : ''}</span>
     {state === 'running' && <LoaderCircle className="spin" size={14}/>}
     <span className="job-date">{when(job.created_at)}</span>
     {job.error && <p className="job-error">{job.error}</p>}
+    {state === 'running' && job.result.current_source && <p className="muted">Источник: {job.result.current_source}.{lastRetry ? ` Повторов запросов: ${job.result.current?.retries}. Последний: ${lastRetry.reason}.` : ''}</p>}
+    {job.result.index_reused && <p className="muted">Данные не изменились, использован готовый индекс.</p>}
     {(job.result.sources?.length || job.result.errors?.length) ? <div className="job-sources">
       {job.result.sources?.map(source => <p key={source.source}>
-        <strong>{source.source}</strong>: загружено {source.fetched}, обновлено {source.changed}{source.skipped ? `, пропущено ${source.skipped}` : ''}.
+        <strong>{source.source}</strong>: загружено {source.fetched}, обновлено {source.changed}{source.skipped ? `, пропущено ${source.skipped}` : ''}{source.retries ? `, повторов запросов: ${source.retries}` : ''}.
       </p>)}
       {job.result.errors?.map((error, index) => <p className="job-error" key={index}><strong>{error.source}</strong>: {error.error}</p>)}
     </div> : null}

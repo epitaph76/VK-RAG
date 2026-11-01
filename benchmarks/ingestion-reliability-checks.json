@@ -1,0 +1,34 @@
+{
+  "checked_at": "2026-11-01T20:46:55.691981+00:00",
+  "environment": "Docker Compose, real admin Update All endpoint",
+  "job_id": "801d19d411b04584adca59fd3d300733",
+  "state": "done",
+  "seconds": 42.51,
+  "sources": [
+    {
+      "source": "Хабр · статьи",
+      "fetched": 40,
+      "changed": 0,
+      "skipped": 0,
+      "errors": [],
+      "retries": 0,
+      "retry_events": []
+    },
+    {
+      "source": "Элементы · наука",
+      "fetched": 10,
+      "changed": 0,
+      "skipped": 0,
+      "errors": [],
+      "retries": 0,
+      "retry_events": []
+    }
+  ],
+  "errors": [],
+  "index_reused": true,
+  "index_before": "92-3af18c611238",
+  "index_after": "92-3af18c611238",
+  "documents_before": 50,
+  "documents_after": 50,
+  "chunks": 644
+}

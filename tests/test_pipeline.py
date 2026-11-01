@@ -230,3 +230,30 @@ def test_worker_reports_page_failures_and_keeps_saved_data(fixture, monkeypatch,
     assert bool(db.source(source['id'])['last_error']) == bool(skipped)
     assert db.documents() == documents
     assert SearchEngine(db, models, cfg).search('alpha', rerank='never')['hits']
+
+
+def test_unchanged_ingest_reuses_index_but_explicit_rebuild_does_not(fixture, monkeypatch):
+    from siterag.worker import run_job
+    db, models, cfg, source = fixture
+    before = SearchEngine(db, models, cfg).search('alpha', rerank='never')['meta']['index_version']
+    monkeypatch.setattr('siterag.worker.collect', lambda *args: {'fetched': 3, 'changed': 0, 'skipped': 0, 'errors': []})
+    db.enqueue('ingest', source['id'])
+    run_job(db, models, cfg, db.claim('test'))
+    assert db.jobs()[0]['result']['index_reused']
+    assert db.jobs()[0]['result']['index']['version'] == before
+    db.enqueue('index')
+    run_job(db, models, cfg, db.claim('test'))
+    assert not db.jobs()[0]['result']['index_reused']
+    assert db.jobs()[0]['result']['index']['version'] != before
+
+
+def test_ingest_rebuilds_a_corrupt_index(fixture, monkeypatch):
+    from siterag.worker import run_job
+    db, models, cfg, source = fixture
+    version = SearchEngine(db, models, cfg).search('alpha', rerank='never')['meta']['index_version']
+    (cfg.data_dir / 'indices' / version / 'chunks.json').write_text('[]')
+    monkeypatch.setattr('siterag.worker.collect', lambda *args: {'fetched': 3, 'changed': 0, 'skipped': 0, 'errors': []})
+    db.enqueue('ingest', source['id'])
+    run_job(db, models, cfg, db.claim('test'))
+    assert db.jobs()[0]['state'] == 'done' and not db.jobs()[0]['result']['index_reused']
+    assert SearchEngine(db, models, cfg).search('alpha', rerank='never')['hits']
